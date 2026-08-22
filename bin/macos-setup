@@ -17,7 +17,7 @@ unset module
 
 usage() {
   cat <<'USAGE'
-Usage: macos-setup [--dry-run] [--yes] COMMAND
+Usage: macos-setup [--dry-run] COMMAND
 
 Commands:
   status    Report installed and managed state
@@ -30,7 +30,6 @@ main() {
   while (($#)); do
     case "$1" in
       --dry-run) DRY_RUN=true; shift ;;
-      --yes|-y) ASSUME_YES=true; shift ;;
       --help|-h) usage; return ;;
       --) shift; break ;;
       -*) die "unknown option: $1" ;;

@@ -48,7 +48,7 @@ Preview all missing work without changing the machine:
 ./bin/macos-setup --dry-run apply
 ```
 
-Use `--yes` to accept prompts. Each phase can also run independently:
+Each phase can also run independently:
 
 ```bash
 ./bin/macos-setup homebrew

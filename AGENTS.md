@@ -12,7 +12,7 @@ There is no build step. Validate changes from the repository root:
 
 - `./bin/macos-setup --help` checks CLI loading and command documentation.
 - `./bin/macos-setup status` reports current managed state.
-- `./bin/macos-setup --dry-run apply` previews setup without mutation (macOS required).
+- `./bin/macos-setup --dry-run apply` previews setup without mutation (macOS required). There is no global `--yes` bypass: state-changing commands use each tool's own non-interactive flags (for example `brew upgrade` does not prompt) or a terminal confirmation prompt via `confirm`.
 - `shellcheck bootstrap.sh bin/macos-setup lib/macos-setup/*.sh` performs static Bash analysis when ShellCheck is installed.
 - `bash -n bootstrap.sh bin/macos-setup lib/macos-setup/*.sh` checks shell syntax.
 

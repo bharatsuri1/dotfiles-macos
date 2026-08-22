@@ -2,7 +2,6 @@ readonly STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-macos"
 readonly BACKUP_ROOT="$STATE_DIR/backups"
 
 DRY_RUN=false
-ASSUME_YES=false
 BACKUP_DIR=""
 
 log() {
@@ -26,12 +25,12 @@ run() {
 
 confirm() {
   local prompt="$1"
-  $ASSUME_YES && return 0
+  [[ -n "$prompt" ]] || die 'confirm requires a prompt'
   local answer
   if [[ -r /dev/tty ]]; then
     read -r -p "$prompt [y/N] " answer </dev/tty
   else
-    die 'interactive confirmation requires a terminal; rerun with --yes for non-interactive use'
+    die "interactive confirmation requires a terminal: $prompt"
   fi
   [[ "$answer" == [yY] || "$answer" == [yY][eE][sS] ]]
 }
