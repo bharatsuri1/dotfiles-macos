@@ -27,7 +27,6 @@ brew "tree"
 brew "gh"
 brew "jless"
 brew "xh"
-brew "httpie"
 brew "hyperfine"
 brew "glow"
 
