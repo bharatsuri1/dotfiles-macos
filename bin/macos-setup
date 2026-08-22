@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+readonly LIB_DIR="$REPO_ROOT/lib/macos-setup"
+
+for module in \
+  common \
+  homebrew \
+  status; do
+  # shellcheck source=/dev/null
+  source "$LIB_DIR/$module.sh"
+done
+unset module
+
+usage() {
+  cat <<'USAGE'
+Usage: macos-setup [--dry-run] [--yes] COMMAND
+
+Commands:
+  status    Report installed and managed state
+  apply     Run every setup phase in dependency order
+  homebrew  Install Homebrew if needed, then run the managed Brewfile
+USAGE
+}
+
+main() {
+  while (($#)); do
+    case "$1" in
+      --dry-run) DRY_RUN=true; shift ;;
+      --yes|-y) ASSUME_YES=true; shift ;;
+      --help|-h) usage; return ;;
+      --) shift; break ;;
+      -*) die "unknown option: $1" ;;
+      *) break ;;
+    esac
+  done
+
+  local command="${1:-apply}"
+  (($# <= 1)) || die 'only one command may be supplied'
+  require_macos
+
+  case "$command" in
+    status) show_status ;;
+    apply)
+      install_homebrew
+      ;;
+    homebrew) install_homebrew ;;
+    *) usage >&2; die "unknown command: $command" ;;
+  esac
+}
+
+main "$@"
