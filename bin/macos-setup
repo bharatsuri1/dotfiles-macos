@@ -9,6 +9,8 @@ readonly LIB_DIR="$REPO_ROOT/lib/macos-setup"
 for module in \
   common \
   homebrew \
+  shell-tools \
+  shell \
   status; do
   # shellcheck source=/dev/null
   source "$LIB_DIR/$module.sh"
@@ -20,9 +22,11 @@ usage() {
 Usage: macos-setup [--dry-run] COMMAND
 
 Commands:
-  status    Report installed and managed state
-  apply     Run every setup phase in dependency order
-  homebrew  Install Homebrew if needed, then run the managed Brewfile
+  status      Report installed and managed state
+  apply       Run every setup phase in dependency order
+  homebrew    Install Homebrew if needed, then run the managed Brewfile
+  shell-tools Install pinned Zsh plugins directly without a plugin manager
+  shell       Link the managed Zsh configuration
 USAGE
 }
 
@@ -45,8 +49,12 @@ main() {
     status) show_status ;;
     apply)
       install_homebrew
+      install_shell_tools
+      install_shell
       ;;
     homebrew) install_homebrew ;;
+    shell-tools) install_shell_tools ;;
+    shell) install_shell ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
 }

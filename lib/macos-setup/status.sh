@@ -14,4 +14,16 @@ show_status() {
   else
     printf 'Homebrew: not installed\n'
   fi
+
+  if [[ -L "$HOME/.zshenv" ]]; then
+    printf 'Zsh env: linked (%s)\n' "$(readlink "$HOME/.zshenv")"
+  else
+    printf 'Zsh env: not linked\n'
+  fi
+
+  if [[ -r "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    printf 'Zsh plugins: installed\n'
+  else
+    printf 'Zsh plugins: not installed\n'
+  fi
 }

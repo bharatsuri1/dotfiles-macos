@@ -11,6 +11,7 @@ brew "bat"
 brew "zoxide"
 brew "starship"
 brew "gum"
+brew "atuin"
 
 # Batch 2: Session/system TUIs
 brew "tmux"

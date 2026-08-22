@@ -52,11 +52,23 @@ Each phase can also run independently:
 
 ```bash
 ./bin/macos-setup homebrew
+./bin/macos-setup shell-tools
+./bin/macos-setup shell
 ```
 
 Configuration deployment uses symlinks back into this checkout. An existing
 target is moved first to a timestamped directory under
 `~/.local/state/dotfiles-macos/backups/`; it is never silently overwritten.
+
+## Shell
+
+The managed Zsh setup keeps durable configuration under `config/zsh/` with
+`ZDOTDIR=~/.config/zsh`. Homebrew-aware completion and fzf integration load
+from the active `brew --prefix`. Starship renders the prompt, Atuin keeps
+history local-only, and two pinned direct-sourced plugins
+(`zsh-autosuggestions` and `fast-syntax-highlighting`) replace any plugin
+manager. Machine-local overrides belong in `~/.zshenv.local` and
+`~/.config/zsh/local.zsh`, both optional and ignored by Git.
 
 ## Scope
 
