@@ -55,6 +55,8 @@ Each phase can also run independently:
 ./bin/macos-setup shell-tools
 ./bin/macos-setup shell
 ./bin/macos-setup config
+./bin/macos-setup nvim
+./bin/macos-setup vscode
 ```
 
 Configuration deployment uses symlinks back into this checkout. An existing
@@ -79,6 +81,16 @@ history), and Ghostty (Rose Pine, JetBrainsMono Nerd Font 14, macOS-native
 window chrome with `Opt` as `Alt`). Tmux copies selections to the macOS
 clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `Prefix Tab` switches to the previous session.
+
+## Editors
+
+The `nvim` phase links a managed LazyVim configuration with the self-contained
+Vesper colorscheme, matching the terminal palette. The `vscode` phase links a
+Vesper-themed settings.json and macOS keybindings into
+`~/Library/Application Support/Code/User/` and installs the reviewed extension
+allowlist (Vim, remote SSH/containers, ChatGPT, OpenCode, Vesper theme, and
+GitHub integrations). VS Code's Ghostty integration is preconfigured via
+`terminal.external.osxExec`.
 
 ## Scope
 

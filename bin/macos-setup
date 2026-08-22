@@ -12,6 +12,8 @@ for module in \
   shell-tools \
   shell \
   config \
+  nvim \
+  vscode \
   status; do
   # shellcheck source=/dev/null
   source "$LIB_DIR/$module.sh"
@@ -28,7 +30,9 @@ Commands:
   homebrew    Install Homebrew if needed, then run the managed Brewfile
   shell-tools Install pinned Zsh plugins directly without a plugin manager
   shell       Link the managed Zsh configuration
-  config      Back up conflicts and link the managed configuration
+  config      Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty)
+  nvim        Link the managed LazyVim Neovim configuration
+  vscode      Link managed VS Code settings and install the reviewed extension allowlist
 USAGE
 }
 
@@ -54,11 +58,15 @@ main() {
       install_shell_tools
       install_shell
       install_config
+      install_nvim
+      install_vscode
       ;;
     homebrew) install_homebrew ;;
     shell-tools) install_shell_tools ;;
     shell) install_shell ;;
     config) install_config ;;
+    nvim) install_nvim ;;
+    vscode) install_vscode ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
 }
