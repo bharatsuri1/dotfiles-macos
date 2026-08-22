@@ -11,6 +11,7 @@ for module in \
   homebrew \
   shell-tools \
   shell \
+  config \
   status; do
   # shellcheck source=/dev/null
   source "$LIB_DIR/$module.sh"
@@ -27,6 +28,7 @@ Commands:
   homebrew    Install Homebrew if needed, then run the managed Brewfile
   shell-tools Install pinned Zsh plugins directly without a plugin manager
   shell       Link the managed Zsh configuration
+  config      Back up conflicts and link the managed configuration
 USAGE
 }
 
@@ -51,10 +53,12 @@ main() {
       install_homebrew
       install_shell_tools
       install_shell
+      install_config
       ;;
     homebrew) install_homebrew ;;
     shell-tools) install_shell_tools ;;
     shell) install_shell ;;
+    config) install_config ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
 }

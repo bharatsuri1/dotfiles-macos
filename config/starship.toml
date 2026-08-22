@@ -1,0 +1,43 @@
+add_newline = true
+command_timeout = 200
+format = "[$directory$git_branch$git_status]($style)\n$character"
+palette = "dotfiles"
+
+[palettes.dotfiles]
+error = "#ff8080"
+love = "#eb6f92"
+mint = "#99ffe4"
+peach = "#ffc799"
+
+[character]
+error_symbol = "[](bold error)"
+success_symbol = "[](bold mint)"
+vimcmd_symbol = "[](bold love)"
+
+[directory]
+format = "[ ]($style)[$path]($style)[$read_only]($read_only_style)  "
+style = "bold peach"
+truncation_length = 2
+truncation_symbol = ""
+read_only = " "
+repo_root_style = "bold peach"
+repo_root_format = "[ ]($repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)  "
+
+[git_branch]
+format = "[ $branch]($style) "
+style = "italic mint"
+
+[git_status]
+format = "[$all_status]($style)"
+style = "mint"
+ahead = "⇡${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+behind = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked = "? "
+modified = " "
+stashed = "󰏗 "
+staged = " "
+renamed = "󰑕 "
+deleted = " "

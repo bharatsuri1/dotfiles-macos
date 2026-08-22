@@ -1,0 +1,65 @@
+# Startup / session
+window-save-state = never
+# New windows inherit the active cwd.
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+window-inherit-font-size = false
+
+# Window / macOS chrome
+maximize = true
+window-decoration = auto
+macos-titlebar-style = tabs
+macos-window-buttons = hidden
+macos-option-as-alt = true
+
+# Padding
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-padding-color = extend
+
+# Appearance
+theme = Rose Pine
+progress-style = false
+split-divider-color = #393552
+unfocused-split-opacity = 0.75
+unfocused-split-fill = #191724
+
+# Font
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+font-thicken = true
+
+# Cursor / mouse
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+mouse-hide-while-typing = true
+cursor-click-to-move = true
+right-click-action = paste
+mouse-scroll-multiplier = precision:1,discrete:5
+
+# Scrollback / clipboard
+scrollback-limit = 50000000
+scrollbar = never
+copy-on-select = clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+clipboard-paste-bracketed-safe = true
+
+# Shell integration / SSH
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
+
+# Links / updates
+link-url = true
+auto-update = download
+auto-update-channel = stable
+
+# Keybinds
+keybind = shift+enter=text:\x1b\r
+
+# Safety
+confirm-close-surface = false

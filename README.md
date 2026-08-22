@@ -54,6 +54,7 @@ Each phase can also run independently:
 ./bin/macos-setup homebrew
 ./bin/macos-setup shell-tools
 ./bin/macos-setup shell
+./bin/macos-setup config
 ```
 
 Configuration deployment uses symlinks back into this checkout. An existing
@@ -69,6 +70,15 @@ history local-only, and two pinned direct-sourced plugins
 (`zsh-autosuggestions` and `fast-syntax-highlighting`) replace any plugin
 manager. Machine-local overrides belong in `~/.zshenv.local` and
 `~/.config/zsh/local.zsh`, both optional and ignored by Git.
+
+## Managed configuration
+
+Beyond the shell, the `config` phase currently links Starship, bat, tmux +
+Sesh (with a Vesper status bar and `Ctrl+Space` prefix), Atuin (local-only
+history), and Ghostty (Rose Pine, JetBrainsMono Nerd Font 14, macOS-native
+window chrome with `Opt` as `Alt`). Tmux copies selections to the macOS
+clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
+`Prefix Tab` switches to the previous session.
 
 ## Scope
 
