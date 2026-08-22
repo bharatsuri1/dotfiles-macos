@@ -30,7 +30,6 @@ brew "xh"
 brew "httpie"
 brew "hyperfine"
 brew "glow"
-brew "fx"
 
 # Batch 4: Editor, AI, and runtime tooling
 brew "neovim"
@@ -54,12 +53,9 @@ brew "k9s"
 brew "lnav"
 brew "logdy"
 brew "lazydocker"
-brew "podman"
-brew "podman-tui"
 brew "lazysql"
 brew "hl"
 brew "television"
-brew "thefuck"
 brew "yazi"
 brew "vivid"
 
@@ -68,10 +64,3 @@ brew "node"
 brew "pnpm"
 brew "bash-completion"
 brew "allure"
-brew "bazelisk"
-
-# Third-party taps: vetted brewtils utilities and Ookla Speedtest
-tap "gromgit/brewtils", trusted: true
-brew "gromgit/brewtils/taproom"
-tap "teamookla/speedtest", trusted: true
-brew "teamookla/speedtest/speedtest"
