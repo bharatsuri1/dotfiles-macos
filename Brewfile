@@ -39,8 +39,29 @@ brew "dashlane-cli"
 
 # Batch 5: macOS-specific utilities
 brew "pinentry-mac"
-cask "stats"
 cask "font-symbols-only-nerd-font"
+
+# Casks: approved GUI applications
+cask "ghostty"
+cask "visual-studio-code"
+cask "google-chrome"
+cask "raycast"
+cask "notion"
+cask "cleanshot"
+cask "homerow"
+cask "dashlane"
+cask "proton-vpn"
+cask "little-snitch"
+cask "photomator"
+cask "discord"
+cask "chatgpt"
+cask "logi-options-plus"
+cask "vial"
+cask "bazecor"
+cask "alcove"
+cask "antinote"
+cask "handy"
+cask "stats"
 
 # Batch 6: Media and imaging
 brew "ffmpeg-full", link: true
