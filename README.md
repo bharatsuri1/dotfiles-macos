@@ -106,8 +106,9 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
   list view default, search current folder, no extension-change warning,
   `Cmd+Q` quits Finder, full POSIX path in title, no `.DS_Store` on network
   volumes.
-- **Dock**: 44px tiles, autohide with no delay and 0.4s animation, no recent
-  apps, no Spaces reordering, minimize into app icon.
+- **Dock**: 44px tiles, autohide with no delay and no slide animation
+  (snap instant), no recent apps, no Spaces reordering, minimize into app
+  icon.
 - **Trackpad**: tap-to-click and three-finger drag enabled. Mouse pointer
   acceleration is intentionally left at the OS default.
 - **Screenshots**: save PNG without shadow or thumbnail preview to
