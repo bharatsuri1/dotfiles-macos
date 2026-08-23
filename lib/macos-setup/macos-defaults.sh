@@ -38,6 +38,13 @@ apply_finder_defaults() {
   defaults_write com.apple.finder _FXShowPosixPathInTitle -bool true
   # Avoid writing .DS_Store on network and removable volumes.
   defaults_write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  # Keep files/folders on the Desktop but hide volume icons (external drives,
+  # removable media, internal disks, network shares) so mounting a DMG does
+  # not clutter the desktop.
+  defaults_write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+  defaults_write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+  defaults_write com.apple.finder ShowHardDrivesOnDesktop -bool false
+  defaults_write com.apple.finder ShowMountedServersOnDesktop -bool false
 }
 
 apply_dock_defaults() {

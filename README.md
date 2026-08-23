@@ -112,7 +112,9 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
   (spelling, capitalization, period, quotes, dashes).
 - **Finder**: show hidden files and all extensions, path bar + status bar,
   list view default, search current folder, no extension-change warning,
-  full POSIX path in title, no `.DS_Store` on network volumes.
+  full POSIX path in title, no `.DS_Store` on network volumes, and hide
+  external/removable/internal/network volume icons on the Desktop (files
+  and folders on the Desktop remain visible).
   (Optional, currently unset: `defaults write com.apple.finder QuitMenuItem -bool true`
   would let `Cmd+Q` quit Finder — including hiding desktop icons — until
   it's relaunched.)
