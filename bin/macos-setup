@@ -14,6 +14,7 @@ for module in \
   config \
   nvim \
   vscode \
+  yazi \
   status; do
   # shellcheck source=/dev/null
   source "$LIB_DIR/$module.sh"
@@ -33,6 +34,7 @@ Commands:
   config      Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty)
   nvim        Link the managed LazyVim Neovim configuration
   vscode      Link managed VS Code settings and install the reviewed extension allowlist
+  yazi        Link the managed Yazi configuration with the Vesper flavor
 USAGE
 }
 
@@ -60,6 +62,7 @@ main() {
       install_config
       install_nvim
       install_vscode
+      install_yazi
       ;;
     homebrew) install_homebrew ;;
     shell-tools) install_shell_tools ;;
@@ -67,6 +70,7 @@ main() {
     config) install_config ;;
     nvim) install_nvim ;;
     vscode) install_vscode ;;
+    yazi) install_yazi ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
 }

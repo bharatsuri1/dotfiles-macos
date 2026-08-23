@@ -57,6 +57,7 @@ Each phase can also run independently:
 ./bin/macos-setup config
 ./bin/macos-setup nvim
 ./bin/macos-setup vscode
+./bin/macos-setup yazi
 ```
 
 Configuration deployment uses symlinks back into this checkout. An existing
@@ -91,6 +92,17 @@ Vesper-themed settings.json and macOS keybindings into
 allowlist (Vim, remote SSH/containers, ChatGPT, OpenCode, Vesper theme, and
 GitHub integrations). VS Code's Ghostty integration is preconfigured via
 `terminal.external.osxExec`.
+
+## Yazi
+
+The `yazi` phase links the managed configuration at `config/yazi/` —
+`yazi.toml`, `keymap.toml`, `theme.toml`, `package.toml`, and the
+self-contained Vesper flavor at `flavors/vesper.yazi/` — into
+`~/.config/yazi/`. The Vesper flavor covers manager, tabs, mode, status,
+pick, input, cmp, tasks, which, help, spot, notify, filetype, and icon
+sections using the palette shared with Zed, Neovim, Alacritty, and
+Quickshell. The `y` shell wrapper (in `config/zsh/aliases.zsh`) changes the
+shell's working directory on Yazi exit (press `q` to accept, `Q` to stay).
 
 ## Scope
 

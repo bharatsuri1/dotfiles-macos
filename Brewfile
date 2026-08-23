@@ -79,6 +79,7 @@ brew "lazysql"
 brew "hl"
 brew "television"
 brew "yazi"
+brew "sevenzip"
 brew "vivid"
 
 # Batch 8: Development runtimes

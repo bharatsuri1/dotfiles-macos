@@ -25,6 +25,17 @@ t() {
   fi
 }
 
+# Yazi shell wrapper: `y` quits Yazi with the CWD you ended in.
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd" || builtin true
+  command rm -f -- "$tmp"
+}
+
 if command -v eza >/dev/null; then
   alias l='eza -lah --group-directories-first --icons=auto'
   alias ll='eza -lah --group-directories-first --icons=auto'
