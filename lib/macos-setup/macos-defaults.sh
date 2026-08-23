@@ -34,8 +34,6 @@ apply_finder_defaults() {
   # Scope searches to the current folder instead of This Mac.
   defaults_write com.apple.finder FXDefaultSearchScope -string "SCcf"
   defaults_write com.apple.finder FXEnableExtensionChangeWarning -bool false
-  # Allow quitting Finder via Cmd+Q so the desktop can be fully reset.
-  defaults_write com.apple.finder QuitMenuItem -bool true
   # Show the full POSIX path in the window title.
   defaults_write com.apple.finder _FXShowPosixPathInTitle -bool true
   # Avoid writing .DS_Store on network and removable volumes.
