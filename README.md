@@ -72,9 +72,11 @@ target is moved first to a timestamped directory under
 ## Shell
 
 The managed Zsh setup keeps durable configuration under `config/zsh/` with
-`ZDOTDIR=~/.config/zsh`. Homebrew-aware completion and fzf integration load
-from the active `brew --prefix`. Starship renders the prompt, Atuin keeps
-history local-only, and two pinned direct-sourced plugins
+`ZDOTDIR=~/.config/zsh`. Homebrew's prefix is exported from `~/.zshenv` so
+non-interactive tools (editors, launch agents, scripts) see it on PATH;
+`integrations.zsh` loads fzf key-bindings/completion from the active
+`brew --prefix`. Starship renders the prompt, Atuin keeps history
+local-only, and two pinned direct-sourced plugins
 (`zsh-autosuggestions` and `fast-syntax-highlighting`) replace any plugin
 manager. Machine-local overrides belong in `~/.zshenv.local` and
 `~/.config/zsh/local.zsh`, both optional and ignored by Git.
