@@ -1,5 +1,5 @@
 # Startup / session
-window-save-state = never
+window-save-state = always
 # New windows inherit the active cwd.
 window-inherit-working-directory = true
 tab-inherit-working-directory = true
