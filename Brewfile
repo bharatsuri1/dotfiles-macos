@@ -35,7 +35,6 @@ brew "glow"
 brew "neovim"
 brew "uv"
 brew "ollama"
-brew "dashlane-cli"
 brew "mise"
 
 # Batch 5: macOS-specific utilities
