@@ -34,6 +34,8 @@ apply_finder_defaults() {
   # Scope searches to the current folder instead of This Mac.
   defaults_write com.apple.finder FXDefaultSearchScope -string "SCcf"
   defaults_write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  # Show the full POSIX path in the window title (false = default behavior).
+  defaults_write com.apple.finder _FXShowPosixPathInTitle -bool false
   # Avoid writing .DS_Store on network and removable volumes.
   defaults_write com.apple.desktopservices DSDontWriteNetworkStores -bool true
   # Keep files/folders on the Desktop but hide volume icons (external drives,
