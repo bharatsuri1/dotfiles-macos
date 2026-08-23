@@ -105,8 +105,9 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
 - **Finder**: show hidden files and all extensions, path bar + status bar,
   list view default, search current folder, no extension-change warning,
   full POSIX path in title, no `.DS_Store` on network volumes.
-  (Optional, currently unset: `QuitMenuItem = true` would let `Cmd+Q` quit
-  Finder — including hiding desktop icons — until it's relaunched.)
+  (Optional, currently unset: `defaults write com.apple.finder QuitMenuItem -bool true`
+  would let `Cmd+Q` quit Finder — including hiding desktop icons — until
+  it's relaunched.)
 - **Dock**: 44px tiles, autohide with no delay and no slide animation
   (snap instant), no recent apps, no Spaces reordering, minimize into app
   icon.
