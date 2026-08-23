@@ -52,6 +52,7 @@ Each phase can also run independently:
 
 ```bash
 ./bin/macos-setup homebrew
+./bin/macos-setup macos-defaults
 ./bin/macos-setup shell-tools
 ./bin/macos-setup shell
 ./bin/macos-setup config
@@ -92,6 +93,33 @@ Vesper-themed settings.json and macOS keybindings into
 allowlist (Vim, remote SSH/containers, ChatGPT, OpenCode, Vesper theme, and
 GitHub integrations). VS Code's Ghostty integration is preconfigured via
 `terminal.external.osxExec`.
+
+## macOS defaults
+
+The `macos-defaults` phase applies reviewed System Settings equivalents via
+`defaults write`:
+
+- **Keyboard**: fast repeat (`KeyRepeat=2`, `InitialKeyRepeat=15`),
+  press-and-hold disabled (Vim-style), all automatic text substitutions off
+  (spelling, capitalization, period, quotes, dashes).
+- **Finder**: show hidden files and all extensions, path bar + status bar,
+  list view default, search current folder, no extension-change warning,
+  `Cmd+Q` quits Finder, full POSIX path in title, no `.DS_Store` on network
+  volumes.
+- **Dock**: 44px tiles, autohide with no delay and 0.4s animation, no recent
+  apps, no Spaces reordering, minimize into app icon.
+- **Trackpad**: tap-to-click and three-finger drag enabled. Mouse pointer
+  acceleration is intentionally left at the OS default.
+- **Screenshots**: save PNG without shadow or thumbnail preview to
+  `~/Pictures/Screenshots` (created if missing).
+- **Menu bar**: clock shows seconds, date, and weekday; battery shows
+  percentage.
+- **General UI**: always dark mode, merged titlebar/toolbar, expanded
+  save/print panels, new documents save locally instead of iCloud.
+
+Finder, Dock, and SystemUIServer are restarted at the end to take effect
+without logout. Risky settings (quarantine, Siri, Spotlight, Touch ID,
+Software Update) are intentionally not managed.
 
 ## Yazi
 
