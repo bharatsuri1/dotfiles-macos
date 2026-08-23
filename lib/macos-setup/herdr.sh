@@ -1,21 +1,32 @@
 readonly HERDR_INSTALLER_URL="https://herdr.dev/install.sh"
-
-herdr_installed() {
-  command -v herdr >/dev/null 2>&1
-}
+readonly HERDR_BINARY="$HOME/.local/bin/herdr"
 
 install_herdr() {
-  if herdr_installed; then
-    log "herdr already installed at $(command -v herdr)"
+  link_config "$REPO_ROOT/config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+
+  if [[ -x "$HERDR_BINARY" ]]; then
+    log "herdr already installed at $HERDR_BINARY"
     return
   fi
 
   if $DRY_RUN; then
-    printf '+ curl -fsSL %s | sh\n' "$HERDR_INSTALLER_URL"
+    log 'would download, inspect, and run the official herdr installer'
+    printf '+ curl -fsSLo <temporary-installer> %q\n' "$HERDR_INSTALLER_URL"
+    printf '+ sh <temporary-installer>\n'
     return
   fi
 
-  log 'installing herdr via the official installer'
-  curl -fsSL "$HERDR_INSTALLER_URL" | sh
-  command -v herdr >/dev/null 2>&1 || die 'herdr installation did not put herdr on PATH'
+  local installer checksum
+  installer="$(mktemp)"
+  curl -fsSLo "$installer" "$HERDR_INSTALLER_URL"
+  checksum="$(shasum -a 256 "$installer" | awk '{print $1}')"
+  log "herdr installer downloaded to $installer (SHA-256: $checksum)"
+
+  if ! confirm 'Run the official herdr installer now?'; then
+    die "herdr installation declined; inspect $installer and rerun this phase"
+  fi
+
+  sh "$installer"
+  rm -f -- "$installer"
+  [[ -x "$HERDR_BINARY" ]] || die 'herdr installer did not produce ~/.local/bin/herdr'
 }
