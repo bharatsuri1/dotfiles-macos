@@ -1,0 +1,23 @@
+onboarding = false
+
+[keys]
+open_worktree = "prefix+shift+o"
+remove_worktree = "prefix+shift+u"
+
+[theme]
+name = "vesper"
+auto_switch = false
+
+[ui]
+show_agent_labels_on_pane_borders = false
+agent_panel_sort = "spaces"
+
+status_indicators = "dots"
+[ui.sound]
+enabled = false
+
+[ui.toast]
+delivery = "herdr"
+
+[session]
+resume_agents_on_restore = false
