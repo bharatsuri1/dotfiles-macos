@@ -133,7 +133,11 @@ phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
 `@openai/codex`, and `@earendil-works/pi-coding-agent` (all with
 `--ignore-scripts`). Python tooling comes from `uv` (installed via Homebrew);
 `uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The
-`herdr` phase runs the official curl installer from herdr.dev.
+`herdr` phase downloads the official installer to a temp file, prints its
+SHA-256, asks for terminal confirmation before running it (no silent
+curl-bash), and links the managed herdr config with the Vesper theme,
+`prefix+shift+o`/`prefix+shift+u` worktree bindings, "spaces" agent panel,
+dot status indicators, no sound, and `onboarding=false`.
 
 ## Yazi
 
