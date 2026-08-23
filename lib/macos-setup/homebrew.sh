@@ -39,5 +39,5 @@ install_homebrew() {
   local brewfile="$REPO_ROOT/Brewfile"
   [[ -f "$brewfile" ]] || die "managed Brewfile is missing at $brewfile"
   log 'installing managed Homebrew packages from the Brewfile'
-  run brew bundle install --file "$brewfile"
+  run brew bundle install --verbose --file "$brewfile"
 }
