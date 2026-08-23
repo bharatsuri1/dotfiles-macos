@@ -1,4 +1,5 @@
-readonly SCREENSHOTS_DIR="$HOME/Pictures/Screenshots"
+readonly XDG_DATA_HOME_RESOLVED="${XDG_DATA_HOME:-$HOME/.local/share}"
+readonly SCREENSHOTS_DIR="${XDG_SCREENSHOTS_DIR:-$XDG_DATA_HOME_RESOLVED/pictures/screenshots}"
 
 # Apply a single `defaults write` so dry-run output stays inspectable. Values
 # are written idempotently; a later phase must killall any daemons whose UI
