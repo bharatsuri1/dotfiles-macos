@@ -56,9 +56,12 @@ Each phase can also run independently:
 ./bin/macos-setup shell-tools
 ./bin/macos-setup shell
 ./bin/macos-setup config
+./bin/macos-setup mise
+./bin/macos-setup npm-tools
 ./bin/macos-setup nvim
 ./bin/macos-setup vscode
 ./bin/macos-setup yazi
+./bin/macos-setup herdr
 ```
 
 Configuration deployment uses symlinks back into this checkout. An existing
@@ -123,7 +126,17 @@ Finder, Dock, and SystemUIServer are restarted at the end to take effect
 without logout. Risky settings (quarantine, Siri, Spotlight, Touch ID,
 Software Update) are intentionally not managed.
 
+## Development runtimes
+
+The `mise` phase installs Node.js globally (`node@latest`). The `npm-tools`
+phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
+`@openai/codex`, and `@earendil-works/pi-coding-agent` (all with
+`--ignore-scripts`). Python tooling comes from `uv` (installed via Homebrew);
+`uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The
+`herdr` phase runs the official curl installer from herdr.dev.
+
 ## Yazi
+
 
 The `yazi` phase links the managed configuration at `config/yazi/` —
 `yazi.toml`, `keymap.toml`, `theme.toml`, `package.toml`, and the

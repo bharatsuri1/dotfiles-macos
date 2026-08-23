@@ -13,9 +13,12 @@ for module in \
   shell-tools \
   shell \
   config \
+  mise \
+  npm-tools \
   nvim \
   vscode \
   yazi \
+  herdr \
   status; do
   # shellcheck source=/dev/null
   source "$LIB_DIR/$module.sh"
@@ -34,9 +37,12 @@ Commands:
   shell-tools    Install pinned Zsh plugins directly without a plugin manager
   shell          Link the managed Zsh configuration
   config         Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty)
+  mise           Install Node.js globally via mise
+  npm-tools      Install global npm CLI tools (pnpm, opencode, codex, pi-coding-agent)
   nvim           Link the managed LazyVim Neovim configuration
   vscode         Link managed VS Code settings and install the reviewed extension allowlist
   yazi           Link the managed Yazi configuration with the Vesper flavor
+  herdr          Install herdr via the official curl installer
 USAGE
 }
 
@@ -63,18 +69,24 @@ main() {
       install_shell_tools
       install_shell
       install_config
+      install_mise
+      install_npm_tools
       install_nvim
       install_vscode
       install_yazi
+      install_herdr
       ;;
     homebrew) install_homebrew ;;
     macos-defaults) install_macos_defaults ;;
     shell-tools) install_shell_tools ;;
     shell) install_shell ;;
     config) install_config ;;
+    mise) install_mise ;;
+    npm-tools) install_npm_tools ;;
     nvim) install_nvim ;;
     vscode) install_vscode ;;
     yazi) install_yazi ;;
+    herdr) install_herdr ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
 }

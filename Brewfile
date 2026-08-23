@@ -36,6 +36,7 @@ brew "neovim"
 brew "uv"
 brew "ollama"
 brew "dashlane-cli"
+brew "mise"
 
 # Batch 5: macOS-specific utilities
 brew "pinentry-mac"
@@ -55,6 +56,7 @@ cask "little-snitch"
 cask "photomator"
 cask "discord"
 cask "chatgpt"
+cask "docker"
 cask "logi-options-plus"
 cask "vial"
 cask "bazecor"
@@ -83,7 +85,5 @@ brew "sevenzip"
 brew "vivid"
 
 # Batch 8: Development runtimes
-brew "node"
-brew "pnpm"
 brew "bash-completion"
 brew "allure"
