@@ -20,7 +20,7 @@ window-padding-balance = true
 window-padding-color = extend
 
 # Appearance
-theme = Rose Pine
+theme = Vesper
 progress-style = false
 split-divider-color = #393552
 unfocused-split-opacity = 0.75
