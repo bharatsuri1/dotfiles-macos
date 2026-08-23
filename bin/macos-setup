@@ -10,6 +10,7 @@ for module in \
   common \
   homebrew \
   macos-defaults \
+  chrome-defaults \
   shell-tools \
   shell \
   config \
@@ -34,6 +35,7 @@ Commands:
   apply          Run every setup phase in dependency order
   homebrew       Install Homebrew if needed, then run the managed Brewfile
   macos-defaults Apply reviewed macOS defaults (keyboard, Finder, Dock, trackpad, screenshots, menu bar, general UI)
+  chrome-defaults Apply managed Chrome policies (no default-browser prompt, block notifications, no password manager)
   shell-tools    Install pinned Zsh plugins directly without a plugin manager
   shell          Link the managed Zsh configuration
   config         Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty)
@@ -66,6 +68,7 @@ main() {
     apply)
       install_homebrew
       install_macos_defaults
+      install_chrome_defaults
       install_shell_tools
       install_shell
       install_config
@@ -78,6 +81,7 @@ main() {
       ;;
     homebrew) install_homebrew ;;
     macos-defaults) install_macos_defaults ;;
+    chrome-defaults) install_chrome_defaults ;;
     shell-tools) install_shell_tools ;;
     shell) install_shell ;;
     config) install_config ;;

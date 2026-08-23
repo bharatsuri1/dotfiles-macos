@@ -53,6 +53,7 @@ Each phase can also run independently:
 ```bash
 ./bin/macos-setup homebrew
 ./bin/macos-setup macos-defaults
+./bin/macos-setup chrome-defaults
 ./bin/macos-setup shell-tools
 ./bin/macos-setup shell
 ./bin/macos-setup config
@@ -129,6 +130,19 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
 Finder, Dock, and SystemUIServer are restarted at the end to take effect
 without logout. Risky settings (quarantine, Siri, Spotlight, Touch ID,
 Software Update) are intentionally not managed.
+
+## Chrome
+
+The `chrome-defaults` phase mirrors Fedora's Chromium policies at the user
+level (no sudo, applies to the current account only):
+
+- `DefaultBrowserSettingEnabled = false` — suppress the default-browser
+  prompt.
+- `DefaultNotificationsSetting = 2` — block all site notifications.
+- `PasswordManagerEnabled = false` — rely on Dashlane instead of Chrome's
+  built-in password manager.
+
+Chrome must be restarted for these to take effect.
 
 ## Development runtimes
 
