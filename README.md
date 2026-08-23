@@ -113,8 +113,7 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
   acceleration is intentionally left at the OS default.
 - **Screenshots**: save PNG without shadow or thumbnail preview to
   `$XDG_DATA_HOME/pictures/screenshots` (default `~/.local/share/pictures/screenshots`, created if missing, honors `XDG_SCREENSHOTS_DIR` when set).
-- **Menu bar**: clock shows seconds, date, and weekday; battery shows
-  percentage.
+- **Menu bar**: clock shows date and weekday; battery shows percentage.
 - **General UI**: always dark mode, merged titlebar/toolbar, expanded
   save/print panels, new documents save locally instead of iCloud.
 

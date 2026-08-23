@@ -77,7 +77,6 @@ apply_screenshot_defaults() {
 
 apply_menubar_defaults() {
   log 'applying menu bar defaults'
-  defaults_write com.apple.menuextra.clock ShowSeconds -bool true
   defaults_write com.apple.menuextra.clock ShowDate -int 1
   defaults_write com.apple.menuextra.clock ShowDayOfWeek -bool true
   defaults_write com.apple.menuextra.battery ShowPercent -string YES
