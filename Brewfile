@@ -62,6 +62,7 @@ cask "alcove"
 cask "antinote"
 cask "handy"
 cask "stats"
+cask "signal"
 cask "font-jetbrains-mono-nerd-font"
 
 # Batch 6: Media and imaging
