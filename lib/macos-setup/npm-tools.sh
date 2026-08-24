@@ -23,10 +23,17 @@ install_npm_tools() {
   for tool in "${NPM_TOOLS[@]}"; do
     if command -v npm >/dev/null 2>&1 && npm_tool_installed "$tool"; then
       log "npm global tool $tool already installed"
-    else
-      # Use --ignore-scripts to keep installer hooks from executing; the tools we
-      # install are pure-JS CLIs that do not need postinstall.
+      continue
+    fi
+    # Suppress lifecycle scripts only for @earendil-works/pi-coding-agent, whose
+    # dependencies include packages with postinstall hooks that fail or are
+    # unnecessary in a global install. Other tools (e.g. opencode-ai) require
+    # their postinstall to download or wire up a platform binary, so they must
+    # install normally. This matches the Fedora policy.
+    if [[ "$tool" == @earendil-works/pi-coding-agent ]]; then
       run npm install -g --ignore-scripts "$tool"
+    else
+      run npm install -g "$tool"
     fi
   done
 }
