@@ -3,6 +3,8 @@ readonly AUTOSUGGESTIONS_REPOSITORY="https://github.com/zsh-users/zsh-autosugges
 readonly AUTOSUGGESTIONS_REVISION="85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5"
 readonly SYNTAX_HIGHLIGHTING_REPOSITORY="https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
 readonly SYNTAX_HIGHLIGHTING_REVISION="3d574ccf48804b10dca52625df13da5edae7f553"
+readonly FZF_TAB_REPOSITORY="https://github.com/Aloxaf/fzf-tab.git"
+readonly FZF_TAB_REVISION="d7e0234614dbe5369fdd760907d12c0e05a4dccc"
 
 install_zsh_plugin() {
   local name="$1"
@@ -42,4 +44,5 @@ install_shell_tools() {
   log 'installing directly sourced Zsh plugins without a plugin manager'
   install_zsh_plugin zsh-autosuggestions "$AUTOSUGGESTIONS_REPOSITORY" "$AUTOSUGGESTIONS_REVISION"
   install_zsh_plugin fast-syntax-highlighting "$SYNTAX_HIGHLIGHTING_REPOSITORY" "$SYNTAX_HIGHLIGHTING_REVISION"
+  install_zsh_plugin fzf-tab "$FZF_TAB_REPOSITORY" "$FZF_TAB_REVISION"
 }

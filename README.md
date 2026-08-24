@@ -76,9 +76,9 @@ The managed Zsh setup keeps durable configuration under `config/zsh/` with
 non-interactive tools (editors, launch agents, scripts) see it on PATH;
 `integrations.zsh` loads fzf key-bindings/completion from the active
 `brew --prefix`. Starship renders the prompt, Atuin keeps history
-local-only, and two pinned direct-sourced plugins
-(`zsh-autosuggestions` and `fast-syntax-highlighting`) replace any plugin
-manager. Machine-local overrides belong in `~/.zshenv.local` and
+local-only, and three pinned direct-sourced plugins
+(`zsh-autosuggestions`, `fast-syntax-highlighting`, and `fzf-tab`) replace any plugin
+manager. `fzf-tab` renders the completion menu as an fzf-powered picker. Machine-local overrides belong in `~/.zshenv.local` and
 `~/.config/zsh/local.zsh`, both optional and ignored by Git.
 
 ## Managed configuration
