@@ -50,7 +50,7 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 	let renderTimer: ReturnType<typeof setTimeout> | null = null;
 
 	/* ─── nerd font icons ─── */
-	const ICON_MODEL = "";
+	const ICON_MODEL = " ";
 	const ICON_THINKING = "";
 	const ICON_COST = " ";
 	const ICON_TOKENS_UP = "";
@@ -437,7 +437,7 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 			});
 
 			return {
-				invalidate() {},
+				invalidate() { },
 				render(width: number) {
 					return renderFooter(width);
 				},
