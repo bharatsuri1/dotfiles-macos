@@ -1,0 +1,31 @@
+{
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
+  "defaultThinkingLevel": "medium",
+  "theme": "dark",
+  "showHardwareCursor": false,
+  "editorPaddingX": 1,
+  "autocompleteMaxVisible": 3,
+  "terminal": {
+    "clearOnShrink": true
+  },
+  "hideThinkingBlock": true,
+  "showCacheMissNotices": true,
+  "collapseChangelog": true,
+  "quietStartup": true,
+  "enableInstallTelemetry": false,
+  "defaultProjectTrust": "always",
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "tuiMode": "fullscreen",
+  "fullscreenExitOutput": "resume-hint",
+  "fullscreenScrollbar": "always",
+  "npmCommand": [
+    "mise",
+    "exec",
+    "node@latest",
+    "--",
+    "npm"
+  ]
+}

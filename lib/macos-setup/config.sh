@@ -11,4 +11,6 @@ install_config() {
   link_config "$REPO_ROOT/config/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
   link_config "$REPO_ROOT/config/opencode/tui.jsonc" "$HOME/.config/opencode/tui.jsonc"
   link_config "$REPO_ROOT/config/opencode/herdr-tui-session.js" "$HOME/.config/opencode/herdr-tui-session.js"
+  link_config "$REPO_ROOT/config/pi/settings.json" "$HOME/.pi/agent/settings.json"
+  link_config "$REPO_ROOT/config/pi/extensions/statusline.ts" "$HOME/.pi/agent/extensions/statusline.ts"
 }

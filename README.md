@@ -92,7 +92,10 @@ clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `config/opencode/` (opencode.jsonc, tui.jsonc with the herdr-tui-session
 plugin, and the plugin file itself) into `~/.config/opencode/` so the
 npm-installed `opencode` CLI picks up Vesper-aware settings, permission
-defaults, and the herdr session-selection integration.
+defaults, and the herdr session-selection integration. It also links managed Pi
+settings and a Vesper statusline extension into `~/.pi/agent/`; the extension
+shows project, Git, model, thinking, context, token, cost, tool, message, and
+agent-activity state and can be toggled with `/statusline`.
 
 ## Editors
 
