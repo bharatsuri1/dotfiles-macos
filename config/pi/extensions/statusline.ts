@@ -53,10 +53,7 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 	const ICON_MODEL = " ";
 	const ICON_THINKING = "";
 	const ICON_COST = " ";
-	const ICON_TOKENS_UP = "";
-	const ICON_TOKENS_DOWN = "";
 	const ICON_CONTEXT = " ";
-	const ICON_CONTEXT_BAR = ""; // Alternatives:  󱞇
 	const ICON_CONTEXT_WINDOW = "";
 	const ICON_TOOLS = " ";
 	const ICON_QUEUE = "";
@@ -102,7 +99,6 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 		return `${str}${units[tier]}`;
 	};
 	const sep = () => rp.muted(" │ ");
-	const hair = () => rp.muted(" · ");
 
 	function queueRender() {
 		const gen = footerGeneration;
@@ -193,17 +189,6 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 
 	function contextWindowText(): string {
 		return contextUsage.contextWindow > 0 ? fmtK(contextUsage.contextWindow) : "ctx";
-	}
-
-	function contextBar(width = 10): string {
-		const pct = Math.max(0, Math.min(100, contextUsage.percent ?? 0));
-		const filled = Math.round((pct / 100) * width);
-		return contextTone()("█".repeat(filled)) + rp.muted("░".repeat(width - filled));
-	}
-
-	function renderContextMeter(width = 10): string {
-		const tone = contextTone();
-		return tone(ICON_CONTEXT_BAR) + "  " + contextBar(width) + " " + tone(contextText());
 	}
 
 	function toolText(): string {
@@ -307,9 +292,6 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 	/* ─── render tiers ─── */
 	function renderWide(width: number): string[] {
 		const ctxTone = contextTone();
-		const tokens = rp.love(ICON_TOKENS_UP) + " " + rp.love(fmtK(totalInput)) + hair() + rp.foam(ICON_TOKENS_DOWN) + " " + rp.foam(fmtK(totalOutput));
-		const contextMeter = renderContextMeter();
-		const contextWindowThinking = iconText(ICON_CONTEXT_WINDOW, contextWindowText(), ctxTone, ctxTone) + hair() + iconText(ICON_THINKING, thinkingLevel, rp.pine, rp.pine);
 
 		let dirBudget = Math.min(34, Math.max(18, Math.floor(width * 0.3)));
 		let modelBudget = Math.min(44, Math.max(24, Math.floor(width * 0.34)));
@@ -322,8 +304,11 @@ export default function statuslineExtension(pi: ExtensionAPI) {
 				{ top: renderAgentStatus(), bottom: renderGit() },
 			]);
 			const right = tableRows([
-				{ top: iconText(ICON_MODEL, modelDisplay(modelBudget), rp.foam, rp.subtle), bottom: contextMeter },
-				{ top: contextWindowThinking, bottom: tokens },
+				{ top: joinSegments([
+					iconText(ICON_MODEL, modelDisplay(modelBudget), rp.foam, rp.subtle),
+					iconText(ICON_CONTEXT_WINDOW, contextWindowText(), ctxTone, ctxTone),
+					iconText(ICON_THINKING, thinkingLevel, rp.pine, rp.pine),
+				]), bottom: "" },
 			]);
 			const rowWidth = Math.max(
 				visibleWidth(left[0]) + 1 + visibleWidth(right[0]),
