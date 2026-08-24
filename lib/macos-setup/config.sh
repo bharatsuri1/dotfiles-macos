@@ -13,4 +13,5 @@ install_config() {
   link_config "$REPO_ROOT/config/opencode/herdr-tui-session.js" "$HOME/.config/opencode/herdr-tui-session.js"
   link_config "$REPO_ROOT/config/pi/settings.json" "$HOME/.pi/agent/settings.json"
   link_config "$REPO_ROOT/config/pi/extensions/statusline.ts" "$HOME/.pi/agent/extensions/statusline.ts"
+  link_config "$REPO_ROOT/config/codex/dotfiles.config.toml" "$HOME/.codex/dotfiles.config.toml"
 }

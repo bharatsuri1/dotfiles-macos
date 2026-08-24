@@ -95,7 +95,10 @@ npm-installed `opencode` CLI picks up Vesper-aware settings, permission
 defaults, and the herdr session-selection integration. It also links managed Pi
 settings and a Vesper statusline extension into `~/.pi/agent/`; the extension
 shows project, Git, model, thinking, context, token, cost, tool, message, and
-agent-activity state and can be toggled with `/statusline`.
+agent-activity state and can be toggled with `/statusline`. It also links a
+Codex `dotfiles` profile into `~/.codex/`, selecting gpt-5.6-terra with medium
+reasoning, hooks, and a colored TUI status line; invoke it with
+`codex --profile dotfiles`.
 
 ## Editors
 
