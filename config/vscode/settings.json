@@ -605,7 +605,6 @@
       ]
     }
   ],
-  "window.menuBarVisibility": "compact",
   "window.restoreWindows": "none",
   "workbench.activityBar.compact": true,
   "workbench.activityBar.iconClickBehavior": "toggle",
