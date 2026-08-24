@@ -28,13 +28,29 @@ unset keymap
 local _vi_cursor_block=$'\e[2 q'   # steady block -> vicmd (normal)
 local _vi_cursor_line=$'\e[6 q'    # steady bar   -> viins (insert)
 
-zle-keymap-select() {
-  if [[ $KEYMAP == vicmd ]]; then
-    printf '%s' "$_vi_cursor_block"
-  else
-    printf '%s' "$_vi_cursor_line"
-  fi
-}
+# Compose with any existing zle-keymap-select widget (starship installs one
+# that calls `zle reset-prompt` so its vimcmd_symbol updates on mode switch).
+# This module sources last, so starship's widget is already registered; wrap
+# it so the original runs first (prompt repaint) and then we set the cursor.
+local _vi_cursor_prev="${widgets[zle-keymap-select]#user:}"
+if [[ -n "$_vi_cursor_prev" && "$_vi_cursor_prev" != zle-keymap-select ]]; then
+  zle-keymap-select() {
+    "$_vi_cursor_prev" "$@"
+    if [[ $KEYMAP == vicmd ]]; then
+      printf '%s' "$_vi_cursor_block"
+    else
+      printf '%s' "$_vi_cursor_line"
+    fi
+  }
+else
+  zle-keymap-select() {
+    if [[ $KEYMAP == vicmd ]]; then
+      printf '%s' "$_vi_cursor_block"
+    else
+      printf '%s' "$_vi_cursor_line"
+    fi
+  }
+fi
 zle -N zle-keymap-select
 
 # Start each edit line in insert shape and restore a block when leaving the
@@ -43,4 +59,3 @@ zle-line-init()   { printf '%s' "$_vi_cursor_line" }
 zle-line-finish() { printf '%s' "$_vi_cursor_block" }
 zle -N zle-line-init
 zle -N zle-line-finish
-unset _vi_cursor_block _vi_cursor_line
