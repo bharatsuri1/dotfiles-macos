@@ -59,6 +59,7 @@ EOF
     "$HOME/.config/zsh/integrations.zsh" \
     "$HOME/.config/zsh/options.zsh" \
     "$HOME/.config/zsh/plugins.zsh" \
+    "$HOME/.config/zsh/keys.zsh" \
     "$HOME/.config/starship.toml" \
     "$HOME/.config/bat/config" \
     "$HOME/.config/tmux/tmux.conf" \

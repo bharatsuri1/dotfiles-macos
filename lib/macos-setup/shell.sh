@@ -30,7 +30,7 @@ install_shell() {
   link_config "$REPO_ROOT/config/zsh/zshrc" "$HOME/.config/zsh/.zshrc"
 
   local module
-  for module in options completion integrations aliases plugins; do
+  for module in options completion integrations aliases plugins keys; do
     link_config "$REPO_ROOT/config/zsh/$module.zsh" "$HOME/.config/zsh/$module.zsh"
   done
 

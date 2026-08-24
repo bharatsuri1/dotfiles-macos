@@ -5,7 +5,8 @@ for module in \
   completion \
   integrations \
   aliases \
-  plugins; do
+  plugins \
+  keys; do
   source "$ZDOTDIR/$module.zsh"
 done
 unset module
