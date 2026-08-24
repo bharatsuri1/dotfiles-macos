@@ -15,3 +15,35 @@ install_nvim() {
 
   link_config "$NVIM_CONFIG_SOURCE" "$NVIM_CONFIG_TARGET"
 }
+
+show_nvim_status() {
+  printf 'Neovim:\n'
+  if nvim_installed; then
+    printf '  [ok]      %s\n' "$(command -v nvim)"
+  else
+    printf '  [missing] nvim\n'
+  fi
+
+  local resolved=""
+  if [[ -L "$NVIM_CONFIG_TARGET" ]]; then
+    resolved="$(readlink -f -- "$NVIM_CONFIG_TARGET" 2>/dev/null || true)"
+  fi
+  if [[ "$resolved" == "$(readlink -f -- "$NVIM_CONFIG_SOURCE" 2>/dev/null || true)" ]]; then
+    printf '  [linked]  %s\n' "$NVIM_CONFIG_TARGET"
+  elif [[ -L "$NVIM_CONFIG_TARGET" && -z "$resolved" ]]; then
+    printf '  [broken]  %s\n' "$NVIM_CONFIG_TARGET"
+  elif [[ -L "$NVIM_CONFIG_TARGET" ]]; then
+    printf '  [wrong]   %s -> %s\n' "$NVIM_CONFIG_TARGET" "$resolved"
+  elif [[ -e "$NVIM_CONFIG_TARGET" ]]; then
+    printf '  [local]   %s\n' "$NVIM_CONFIG_TARGET"
+  else
+    printf '  [missing] %s\n' "$NVIM_CONFIG_TARGET"
+  fi
+
+  # Aliases are shell-config owned; report whether the managed alias file defines them.
+  if grep -q "alias vim='nvim'" "$REPO_ROOT/config/zsh/aliases.zsh" 2>/dev/null; then
+    printf '  [alias]   v, vi, vim -> nvim\n'
+  else
+    printf '  [missing] v/vi/vim aliases in managed zsh aliases\n'
+  fi
+}

@@ -30,3 +30,30 @@ install_herdr() {
   rm -f -- "$installer"
   [[ -x "$HERDR_BINARY" ]] || die 'herdr installer did not produce ~/.local/bin/herdr'
 }
+
+show_herdr_status() {
+  printf 'Herdr:\n'
+  if [[ -x "$HERDR_BINARY" ]]; then
+    printf '  [ok]      %s\n' "$HERDR_BINARY"
+  else
+    printf '  [missing] %s\n' "$HERDR_BINARY"
+  fi
+
+  local target="$HOME/.config/herdr/config.toml"
+  local source="$REPO_ROOT/config/herdr/config.toml"
+  local resolved=""
+  if [[ -L "$target" ]]; then
+    resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
+  fi
+  if [[ "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
+    printf '  [linked]  %s\n' "$target"
+  elif [[ -L "$target" && -z "$resolved" ]]; then
+    printf '  [broken]  %s\n' "$target"
+  elif [[ -L "$target" ]]; then
+    printf '  [wrong]   %s -> %s\n' "$target" "$resolved"
+  elif [[ -e "$target" ]]; then
+    printf '  [local]   %s\n' "$target"
+  else
+    printf '  [missing] %s\n' "$target"
+  fi
+}

@@ -31,7 +31,6 @@ as the baseline). No shared symlink or submodule couples them.
 | Codex profile | `config/codex/dotfiles.config.toml` | Identical |
 | Pi settings | `config/pi/settings.json` | May drift independently (runtime model/provider switches) |
 | Pi statusline | `config/pi/extensions/statusline.ts` | Identical |
-| Yazi | `config/yazi/yazi.toml`, `keymap.toml` | Both track the Yazi `shipped` preset defaults |
 | Fastfetch | `config/fastfetch/config.jsonc` | Identical (fastfetch does OS detection internally) |
 
 ### Platform-native tools (exist on one repo only)
@@ -41,6 +40,7 @@ as the baseline). No shared symlink or submodule couples them.
 | Tool | Why platform-native |
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
+| Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
 | Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy, Stats | macOS-only GUI applications |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |

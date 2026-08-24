@@ -37,3 +37,15 @@ install_npm_tools() {
     fi
   done
 }
+
+show_npm_tools_status() {
+  printf 'Mise-managed npm tools:\n'
+  local item
+  for item in "${NPM_TOOLS[@]}"; do
+    if command -v npm >/dev/null 2>&1 && npm_tool_installed "$item"; then
+      printf '  [ok]      %s\n' "$item"
+    else
+      printf '  [missing] %s\n' "$item"
+    fi
+  done
+}

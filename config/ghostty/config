@@ -22,9 +22,9 @@ window-padding-color = extend
 # Appearance
 theme = Vesper
 progress-style = false
-split-divider-color = #393552
+split-divider-color = #2A2A2A
 unfocused-split-opacity = 0.75
-unfocused-split-fill = #191724
+unfocused-split-fill = #161616
 
 # Font
 font-family = "JetBrainsMono Nerd Font"
