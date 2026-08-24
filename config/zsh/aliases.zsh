@@ -7,6 +7,9 @@ alias mkdir='mkdir -p'
 alias which='type -a'
 alias path='print -l $path'
 alias reload='exec zsh'
+alias cx='codex --profile dotfiles'
+alias sol='codex --profile dotfiles -c model="gpt-5.6-sol"'
+alias terra='codex --profile dotfiles -c model="gpt-5.6-terra"'
 alias tl='sesh picker'
 alias tk='tmux kill-server'
 alias afk='pmset displaysleepnow'
@@ -50,7 +53,12 @@ fi
 
 command -v df >/dev/null && alias df='df -h'
 command -v du >/dev/null && alias du='du -h'
-command -v nvim >/dev/null && alias v='nvim'
+command -v rg >/dev/null && alias grep='rg --color=auto'
+if command -v nvim >/dev/null; then
+  alias v='nvim'
+  alias vi='nvim'
+  alias vim='nvim'
+fi
 command -v lazygit >/dev/null && alias lg='lazygit'
 command -v lazydocker >/dev/null && alias ld='lazydocker'
 
@@ -64,6 +72,26 @@ fi
 
 mkcd() {
   mkdir -p -- "$1" && cd -- "$1"
+}
+
+# Pick a pi model from `pi --list-models` via a fuzzy gum chooser, then launch it.
+# Falls back to passing args straight through to `pi` when gum isn't installed.
+pim() {
+  if ! command -v gum >/dev/null 2>&1; then
+    pi "$@"
+    return $?
+  fi
+  local line provider model
+  line=$(pi --list-models 2>/dev/null | tail -n +2 |
+    gum filter --height=35 --fuzzy \
+      --header='  Select a model' --header.foreground=99 \
+      --prompt='› ' --prompt.foreground=240 \
+      --placeholder='type to fuzzy-match model or provider...' \
+      --indicator='▶' --indicator.foreground=212 \
+      --match.foreground=212) || return
+  [[ -z "$line" ]] && return
+  read -r provider model _ <<< "$line"
+  pi --model "${provider}/${model}"
 }
 
 # Keep the system awake until Ctrl-C, or wrap a command with `caffeinate -dims`.

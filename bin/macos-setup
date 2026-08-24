@@ -38,7 +38,7 @@ Commands:
   chrome-defaults Apply managed Chrome policies (no default-browser prompt, block notifications, no password manager)
   shell-tools    Install pinned Zsh plugins directly without a plugin manager
   shell          Link the managed Zsh configuration
-  config         Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty)
+  config         Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty, Fastfetch)
   mise           Install Node.js globally via mise
   npm-tools      Install global npm CLI tools (pnpm, opencode, codex, pi-coding-agent)
   nvim           Link the managed LazyVim Neovim configuration

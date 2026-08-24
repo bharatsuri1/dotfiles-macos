@@ -4,6 +4,7 @@ install_config() {
   link_config "$REPO_ROOT/config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
   link_config "$REPO_ROOT/config/tmux/status.conf" "$HOME/.config/tmux/status.conf"
   link_config "$REPO_ROOT/config/sesh/sesh.toml" "$HOME/.config/sesh/sesh.toml"
+  link_config "$REPO_ROOT/config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
   link_config "$REPO_ROOT/config/atuin/config.toml" "$HOME/.config/atuin/config.toml"
   link_config "$REPO_ROOT/config/mise/config.toml" "$HOME/.config/mise/config.toml"
   link_config "$REPO_ROOT/config/ghostty/config" "$HOME/.config/ghostty/config"
