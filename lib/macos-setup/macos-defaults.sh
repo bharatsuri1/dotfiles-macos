@@ -34,6 +34,8 @@ apply_finder_defaults() {
   # Scope searches to the current folder instead of This Mac.
   defaults_write com.apple.finder FXDefaultSearchScope -string "SCcf"
   defaults_write com.apple.finder FXEnableExtensionChangeWarning -bool false
+  # Remove Finder's open, close, and navigation animations.
+  defaults_write com.apple.finder DisableAllAnimations -bool true
   # Show the full POSIX path in the window title (false = default behavior).
   defaults_write com.apple.finder _FXShowPosixPathInTitle -bool false
   # Avoid writing .DS_Store on network and removable volumes.
@@ -60,6 +62,10 @@ apply_dock_defaults() {
   defaults_write com.apple.dock minimize-to-application -bool true
   defaults_write com.apple.dock largesize -int 96
   defaults_write com.apple.dock launchanim -bool false
+  # Use a shorter, less theatrical minimize animation.
+  defaults_write com.apple.dock mineffect -string "scale"
+  # Remove the Mission Control / Exposé transition delay.
+  defaults_write com.apple.dock expose-animation-duration -float 0.0
 }
 
 apply_trackpad_defaults() {
@@ -91,6 +97,11 @@ apply_general_defaults() {
   log 'applying general UI defaults'
   defaults_write NSGlobalDomain AppleInterfaceStyle -string "Dark"
   defaults_write NSGlobalDomain AppleReduceDesktopTinting -bool true
+  # Replace the slow Space-switching motion with a quick fade.
+  defaults_write com.apple.Accessibility ReduceMotionEnabled -bool true
+  # Shorten standard AppKit window resizing and Quick Look transitions.
+  defaults_write NSGlobalDomain NSWindowResizeTime -float 0.05
+  defaults_write NSGlobalDomain QLPanelAnimationDuration -float 0.1
   # Merge the titlebar and toolbar for a cleaner window chrome.
   defaults_write NSGlobalDomain NSTitlebarToolbarSeparatorStyle -string "none"
   # Expand the save and print panels by default.
