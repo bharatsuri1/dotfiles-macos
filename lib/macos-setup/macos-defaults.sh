@@ -49,7 +49,7 @@ apply_finder_defaults() {
 
 apply_dock_defaults() {
   log 'applying Dock defaults'
-  defaults_write com.apple.dock tilesize -int 44
+  defaults_write com.apple.dock tilesize -int 64
   defaults_write com.apple.dock autohide -bool true
   # Show and hide the dock instantly: no hover delay and no slide animation.
   defaults_write com.apple.dock autohide-delay -float 0.0
@@ -58,7 +58,7 @@ apply_dock_defaults() {
   # Keep Spaces in their original order; do not reorder by usage.
   defaults_write com.apple.dock mru-spaces -bool false
   defaults_write com.apple.dock minimize-to-application -bool true
-  defaults_write com.apple.dock largesize -int 64
+  defaults_write com.apple.dock largesize -int 96
   defaults_write com.apple.dock launchanim -bool false
 }
 
