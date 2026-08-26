@@ -1,6 +1,6 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-model = "gpt-5.luna"
+model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
 
 [features]
@@ -15,3 +15,4 @@ status_line = [
   "context-used",
 ]
 status_line_use_colors = true
+
