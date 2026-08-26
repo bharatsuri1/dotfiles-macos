@@ -31,7 +31,7 @@ else
 fi
 
 log 'running the macOS setup from the repo'
-"$INSTALL_ROOT/bin/macos-setup" apply
+DOTFILES_MACOS_ASSUME_YES=1 "$INSTALL_ROOT/bin/macos-setup" apply
 
 if command -v brew &>/dev/null; then
   log 'updating Homebrew packages'
