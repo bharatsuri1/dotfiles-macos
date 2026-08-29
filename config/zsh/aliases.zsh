@@ -46,6 +46,7 @@ y() {
 }
 
 if command -v eza >/dev/null; then
+  alias ls='eza --group-directories-first --icons=auto'
   alias l='eza -lah --group-directories-first --icons=auto'
   alias ll='eza -lah --group-directories-first --icons=auto'
   alias la='eza -a --group-directories-first --icons=auto'
