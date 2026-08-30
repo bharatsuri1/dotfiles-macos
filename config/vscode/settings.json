@@ -204,6 +204,7 @@
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.profiles.osx": {
     "zsh": {
       "args": [
