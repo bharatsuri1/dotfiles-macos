@@ -99,7 +99,6 @@ as the baseline). No shared symlink or submodule couples them.
 | neovim | `brew neovim` | `dnf neovim` |
 | uv | `brew uv` | `dnf uv` (development phase) |
 | mise | `brew mise` | `dnf mise` (development phase) |
-| ollama | `brew ollama` | `ollama.sh` (curl installer) |
 | @openai/codex | `npm -g` | `npm -g` (mise node) |
 | opencode-ai | `npm -g` | `npm -g` (mise node) |
 | @earendil-works/pi-coding-agent | `npm -g --ignore-scripts` | `npm -g --ignore-scripts` (mise node) |
@@ -120,6 +119,7 @@ gap that blocks macOS.
 
 | Tool | Applicable to macOS? |
 |------|---------------------|
+| `ollama` | No — intentionally removed from the macOS Brewfile |
 | `dashlane/tap/dashlane-cli` | Yes — could be added to the macOS Brewfile if desired |
 | `diskonaut` | Yes — available on Homebrew |
 | `powertop` | No — Linux power tool |
