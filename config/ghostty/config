@@ -60,6 +60,7 @@ auto-update-channel = stable
 
 # Keybinds
 keybind = shift+enter=text:\x1b\r
+keybind = super+r=prompt_tab_title
 
 # Safety
 confirm-close-surface = false
