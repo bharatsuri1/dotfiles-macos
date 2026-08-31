@@ -41,7 +41,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
 | Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
-| Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy, Stats | macOS-only GUI applications |
+| 1Password, Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy, Stats | macOS-only GUI applications |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |
 | `caffeinate` wrapper | macOS has a native `caffeinate`; Fedora uses `systemd-inhibit` |
@@ -56,7 +56,6 @@ as the baseline). No shared symlink or submodule couples them.
 | niri, SwayNC, Quickshell, SDDM, gtklock | Wayland desktop session |
 | keyd | Linux keyboard remapping |
 | voxtype, vicinae | Fedora input method daemons |
-| dashlane-cli | `dashlane/tap/dashlane-cli` via Linuxbrew |
 | diskonaut, powertop, systemctl-tui, bandwhich, batctl | Linux system tools (systemd, power, battery) |
 | wiremix, wlctl, bluetui | Linux audio/Bluetooth TUIs |
 | grim, slurp | Wayland screenshot tools |
@@ -120,7 +119,6 @@ gap that blocks macOS.
 | Tool | Applicable to macOS? |
 |------|---------------------|
 | `ollama` | No — intentionally removed from the macOS Brewfile |
-| `dashlane/tap/dashlane-cli` | Yes — could be added to the macOS Brewfile if desired |
 | `diskonaut` | Yes — available on Homebrew |
 | `powertop` | No — Linux power tool |
 | `systemctl-tui` | No — systemd-specific |
@@ -134,7 +132,6 @@ Core developer CLI parity is solid — every shared tool that both setups need
 is present on both. The macOS Brewfile carries a broader set of convenience
 CLIs (jq, direnv, hyperfine, k9s, lnav, etc.) that Fedora could adopt over
 time. Fedora's Linux-specific system tools (powertop, systemctl-tui, batctl)
-have no macOS equivalent and never will. The only Fedora developer CLI that
-could reasonably be added to macOS is `dashlane-cli` (and optionally
-`diskonaut`/`bandwhich`); this is deferred pending explicit desire to use them
-on macOS.
+have no macOS equivalent and never will. The remaining Fedora developer CLIs
+that could reasonably be added to macOS are `diskonaut` and `bandwhich`; this
+is deferred pending explicit desire to use them on macOS.

@@ -149,7 +149,7 @@ level (no sudo, applies to the current account only):
 - `DefaultBrowserSettingEnabled = false` — suppress the default-browser
   prompt.
 - `DefaultNotificationsSetting = 2` — block all site notifications.
-- `PasswordManagerEnabled = false` — rely on Dashlane instead of Chrome's
+- `PasswordManagerEnabled = false` — rely on 1Password instead of Chrome's
   built-in password manager.
 
 Chrome must be restarted for these to take effect.
