@@ -44,6 +44,8 @@ cask "font-symbols-only-nerd-font"
 # Casks: approved GUI applications
 cask "ghostty"
 cask "visual-studio-code"
+cask "1password"
+cask "google-chrome"
 cask "copilot-money"
 cask "raycast"
 cask "cleanshot"
