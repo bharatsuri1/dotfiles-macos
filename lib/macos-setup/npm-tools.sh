@@ -3,6 +3,7 @@ readonly NPM_TOOLS=(
   opencode-ai
   @openai/codex
   @earendil-works/pi-coding-agent
+  @devcontainers/cli
 )
 
 npm_tool_installed() {

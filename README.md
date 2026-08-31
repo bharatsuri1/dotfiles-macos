@@ -158,8 +158,8 @@ Chrome must be restarted for these to take effect.
 
 The `mise` phase installs Node.js globally (`node@latest`). The `npm-tools`
 phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
-`@openai/codex`, and `@earendil-works/pi-coding-agent` (all with
-`--ignore-scripts`). Python tooling comes from `uv` (installed via Homebrew);
+`@openai/codex`, `@earendil-works/pi-coding-agent`, and
+`@devcontainers/cli`. Python tooling comes from `uv` (installed via Homebrew);
 `uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The
 `herdr` phase downloads the official installer to a temp file, prints its
 SHA-256, asks for terminal confirmation before running it (no silent
