@@ -28,6 +28,7 @@ as the baseline). No shared symlink or submodule couples them.
 | Sesh | `config/sesh/sesh.toml` | Identical |
 | Neovim (LazyVim) | `config/nvim/` | Separate lockfiles by design (see below) |
 | VS Code settings | `config/vscode/settings.json` | Vim keybindings identical; terminal profiles and external-terminal settings are platform-specific |
+| Zed | `config/zed/` | Shared editor settings and Vesper theme; keymaps are platform-specific and AI/provider settings stay local |
 | Codex profile | `config/codex/dotfiles.config.toml` | Identical |
 | Pi settings | `config/pi/settings.json` | May drift independently (runtime model/provider switches) |
 | Pi statusline | `config/pi/extensions/statusline.ts` | Identical |
@@ -59,7 +60,6 @@ as the baseline). No shared symlink or submodule couples them.
 | diskonaut, powertop, systemctl-tui, bandwhich, batctl | Linux system tools (systemd, power, battery) |
 | wiremix, wlctl, bluetui | Linux audio/Bluetooth TUIs |
 | grim, slurp | Wayland screenshot tools |
-| Zed | Fedora installs Zed as a Flatpak; macOS does not install Zed |
 
 ### Deliberately divergent
 

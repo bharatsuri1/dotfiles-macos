@@ -31,6 +31,8 @@ show_status() {
 
   show_vscode_status
 
+  show_zed_status
+
   show_yazi_status
 
   printf 'Zsh plugins:\n'
@@ -81,7 +83,10 @@ EOF
     "$HOME/.config/opencode/herdr-tui-session.js" \
     "$HOME/.local/bin/macos-update" \
     "$VSCODE_SETTINGS_TARGET" \
-    "$VSCODE_KEYBINDINGS_TARGET"; do
+    "$VSCODE_KEYBINDINGS_TARGET" \
+    "$ZED_SETTINGS_TARGET" \
+    "$ZED_THEME_TARGET" \
+    "$ZED_KEYMAP_TARGET"; do
     if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$REPO_ROOT"/* ]]; then
       printf '  [linked]  %s\n' "$target"
     else

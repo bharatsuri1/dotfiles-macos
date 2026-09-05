@@ -1,0 +1,88 @@
+{
+  "cli_default_open_behavior": "existing_window",
+  "base_keymap": "Zed",
+  "vim_mode": true,
+  "vim": {
+    "default_mode": "normal",
+    "cursor_shape": {
+      "normal": "block",
+      "replace": "underline",
+      "visual": "block",
+      "insert": "bar"
+    },
+    "use_smartcase_find": true,
+    "use_system_clipboard": "on_yank",
+    "use_regex_search": true,
+    "gdefault": true,
+    "highlight_on_yank_duration": 200,
+    "toggle_relative_line_numbers": false
+  },
+  "relative_line_numbers": "enabled",
+  "cursor_shape": "bar",
+  "cursor_blink": false,
+  "autosave": "on_focus_change",
+  "restore_on_startup": "launchpad",
+  "confirm_quit": false,
+  "vertical_scroll_margin": 10,
+  "scroll_beyond_last_line": "off",
+  "scrollbar": {
+    "show": "never"
+  },
+  "use_smartcase_search": true,
+  "sticky_scroll": {
+    "enabled": false
+  },
+  "ui_font_family": "Inter",
+  "ui_font_size": 16,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 14,
+  "terminal": {
+    "scroll_multiplier": 4.0,
+    "alternate_scroll": "off"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "session": {
+    "restore_unsaved_buffers": false,
+    "trust_all_worktrees": true
+  },
+  "minimap": {
+    "show": "always"
+  },
+  "preview_tabs": {
+    "enable_preview_from_project_panel": false,
+    "enable_preview_file_from_code_navigation": false,
+    "enable_preview_from_multibuffer": false
+  },
+  "diff_view_style": "unified",
+  "format_on_save": "off",
+  "soft_wrap": "editor_width",
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 400
+    }
+  },
+  "project_panel": {
+    "dock": "left",
+    "starts_open": false,
+    "entry_spacing": "standard"
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "errors"
+  },
+  "theme": "Vesper",
+  "command_aliases": {
+    "W": "w",
+    "Wq": "wq",
+    "Wqa": "wqa",
+    "Q": "q"
+  }
+}
