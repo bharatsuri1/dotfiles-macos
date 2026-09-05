@@ -11,13 +11,11 @@ readonly VSCODE_EXTENSIONS=(
   ms-vscode-remote.remote-ssh-edit
   GitHub.vscode-pull-request-github
   ms-vscode.remote-explorer
-  openai.chatgpt
   raunofreiberg.vesper
   ms-azuretools.vscode-docker
   ms-vscode-remote.remote-containers
   ms-azuretools.vscode-containers
   GitHub.vscode-github-actions
-  sst-dev.opencode
   pomdtr.excalidraw-editor
 )
 
