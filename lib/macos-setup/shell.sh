@@ -35,7 +35,8 @@ install_shell() {
   done
 
   if [[ ! -r "$ZSH_PLUGIN_ROOT/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] ||
-    [[ ! -r "$ZSH_PLUGIN_ROOT/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]]; then
+    [[ ! -r "$ZSH_PLUGIN_ROOT/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]] ||
+    [[ ! -r "$ZSH_PLUGIN_ROOT/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
     log 'pinned Zsh plugins are not installed; run the shell-tools phase first'
   fi
 }

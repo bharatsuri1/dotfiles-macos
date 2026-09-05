@@ -5,6 +5,8 @@ readonly SYNTAX_HIGHLIGHTING_REPOSITORY="https://github.com/zdharma-continuum/fa
 readonly SYNTAX_HIGHLIGHTING_REVISION="3d574ccf48804b10dca52625df13da5edae7f553"
 readonly FZF_TAB_REPOSITORY="https://github.com/Aloxaf/fzf-tab.git"
 readonly FZF_TAB_REVISION="d7e0234614dbe5369fdd760907d12c0e05a4dccc"
+readonly HISTORY_SUBSTRING_SEARCH_REPOSITORY="https://github.com/zsh-users/zsh-history-substring-search.git"
+readonly HISTORY_SUBSTRING_SEARCH_REVISION="14c8d2e0ffaee98f2df9850b19944f32546fdea5"
 
 install_zsh_plugin() {
   local name="$1"
@@ -45,4 +47,7 @@ install_shell_tools() {
   install_zsh_plugin zsh-autosuggestions "$AUTOSUGGESTIONS_REPOSITORY" "$AUTOSUGGESTIONS_REVISION"
   install_zsh_plugin fast-syntax-highlighting "$SYNTAX_HIGHLIGHTING_REPOSITORY" "$SYNTAX_HIGHLIGHTING_REVISION"
   install_zsh_plugin fzf-tab "$FZF_TAB_REPOSITORY" "$FZF_TAB_REVISION"
+  install_zsh_plugin zsh-history-substring-search \
+    "$HISTORY_SUBSTRING_SEARCH_REPOSITORY" \
+    "$HISTORY_SUBSTRING_SEARCH_REVISION"
 }

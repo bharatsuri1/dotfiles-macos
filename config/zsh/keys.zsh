@@ -19,6 +19,18 @@ for keymap in viins emacs; do
 done
 unset keymap
 
+# Type any text from a prior command, then use Up/Down to cycle only matching
+# history entries. Bind both normal and application cursor-key escape codes.
+if (( $+widgets[history-substring-search-up] )); then
+  for keymap in viins emacs; do
+    bindkey -M "$keymap" '^[[A' history-substring-search-up
+    bindkey -M "$keymap" '^[OA' history-substring-search-up
+    bindkey -M "$keymap" '^[[B' history-substring-search-down
+    bindkey -M "$keymap" '^[OB' history-substring-search-down
+  done
+  unset keymap
+fi
+
 # Vi-mode per-keymap cursor shape via DECSCUSR. Match the VS Code vim
 # settings (block for normal, line for insert) so the terminal and editor
 # agree on what each mode looks like. Ghostty supports DECSCUSR; the
