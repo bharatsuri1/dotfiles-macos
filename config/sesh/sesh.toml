@@ -16,8 +16,9 @@ name = "home"
 path = "~"
 disable_startup_command = true
 
-[[wildcard]]
-pattern = "~/**"
+[[session]]
+name = "dotfiles-macos"
+path = "~/.local/share/dotfiles-macos"
 startup_command = "tmux rename-window shell"
 windows = ["agent", "editor", "git"]
 
