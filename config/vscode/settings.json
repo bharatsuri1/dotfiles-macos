@@ -133,7 +133,7 @@
   "chatgpt.composerEnterBehavior": "enter",
   "chatgpt.openOnStartup": false,
   "diffEditor.renderSideBySide": false,
-  "editor.accessibilitySupport": "on",
+  "editor.accessibilitySupport": "off",
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": "off",
