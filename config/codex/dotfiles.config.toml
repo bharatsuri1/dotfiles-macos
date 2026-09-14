@@ -7,12 +7,9 @@ model_reasoning_effort = "low"
 hooks = true
 
 [tui]
-status_line = [
-  "model-with-reasoning",
-  "current-dir",
-  "git-branch",
-  "run-state",
-  "context-used",
-]
+status_line = ["model-with-reasoning", "current-dir", "run-state", "context-used", "five-hour-limit", "thread-name"]
 status_line_use_colors = true
+
+[tui.model_availability_nux]
+gpt-6-astra = 4
 
