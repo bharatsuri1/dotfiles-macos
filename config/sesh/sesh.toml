@@ -19,7 +19,7 @@ disable_startup_command = true
 [[session]]
 name = "dotfiles-macos"
 path = "~/.local/share/dotfiles-macos"
-startup_command = "tmux rename-window shell"
+disable_startup_command = true
 windows = ["agent", "editor", "git"]
 
 [[window]]
