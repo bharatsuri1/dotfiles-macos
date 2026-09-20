@@ -113,6 +113,7 @@
   "accessibility.signals.voiceRecordingStopped": {
     "sound": "off"
   },
+  "cursor.composer.editorConversationDensity": "compact-all-grouped",
   "cursor.cpp.disabledLanguages": [
     "markdown",
     "plaintext",
@@ -589,6 +590,5 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "none",
-  "workbench.tree.indent": 12,
-  "cursor.composer.editorConversationDensity": "compact-all-grouped"
+  "workbench.tree.indent": 12
 }
