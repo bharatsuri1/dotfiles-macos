@@ -61,6 +61,7 @@ Each phase can also run independently:
 ./bin/macos-setup npm-tools
 ./bin/macos-setup nvim
 ./bin/macos-setup vscode
+./bin/macos-setup cursor
 ./bin/macos-setup zed
 ./bin/macos-setup yazi
 ./bin/macos-setup herdr
@@ -109,7 +110,9 @@ Vesper-themed settings.json and macOS keybindings into
 `~/Library/Application Support/Code/User/` and installs the reviewed extension
 allowlist (Vim, remote SSH/containers, ChatGPT, OpenCode, Vesper theme, and
 GitHub integrations). VS Code's Ghostty integration is preconfigured via
-`terminal.external.osxExec`. The `zed` phase links editor-only settings,
+`terminal.external.osxExec`. The `cursor` phase links its own managed settings
+and macOS keybindings and maintains an independent extension allowlist. The
+`zed` phase links editor-only settings,
 macOS-native keybindings, and the same Vesper theme into `~/.config/zed/`;
 Zed's accounts, AI/provider settings, extensions, and runtime state stay local.
 

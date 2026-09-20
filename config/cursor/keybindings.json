@@ -1,0 +1,66 @@
+// Keybindings - macOS-specific; Fedora's ctrl-* editor bindings are omitted
+// because macOS reserves most ctrl-* shortcuts for system text navigation.
+[
+  // Navigation back/forward (replaces indent/outdent, handled by vim > and <)
+  {
+    "key": "cmd+[",
+    "command": "-editor.action.outdentLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+]",
+    "command": "-editor.action.indentLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "cmd+[",
+    "command": "workbench.action.navigateBack",
+    "when": "canNavigateBack"
+  },
+  {
+    "key": "cmd+]",
+    "command": "workbench.action.navigateForward",
+    "when": "canNavigateForward"
+  },
+
+  // Code navigation
+  {
+    "key": "alt+cmd+b",
+    "command": "editor.action.revealDefinition"
+  },
+  {
+    "key": "alt+cmd+h",
+    "command": "editor.action.goToTypeDefinition"
+  },
+  {
+    "key": "alt+cmd+i",
+    "command": "editor.action.goToImplementation"
+  },
+  {
+    "key": "alt+cmd+j",
+    "command": "references-view.findReferences",
+    "when": "editorHasReferenceProvider"
+  },
+
+  // Tasks & Window
+  {
+    "key": "cmd+r cmd+t",
+    "command": "workbench.action.tasks.runTask"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "workbench.action.reloadWindow"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+
+  // Finder-style focus restore from the Explorer.
+  {
+    "command": "workbench.action.focusActiveEditorGroup",
+    "key": "escape",
+    "when": "filesExplorerFocus && !inputFocus"
+  }
+]

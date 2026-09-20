@@ -31,6 +31,8 @@ show_status() {
 
   show_vscode_status
 
+  show_cursor_status
+
   show_zed_status
 
   show_yazi_status
@@ -84,6 +86,8 @@ EOF
     "$HOME/.local/bin/macos-update" \
     "$VSCODE_SETTINGS_TARGET" \
     "$VSCODE_KEYBINDINGS_TARGET" \
+    "$CURSOR_SETTINGS_TARGET" \
+    "$CURSOR_KEYBINDINGS_TARGET" \
     "$ZED_SETTINGS_TARGET" \
     "$ZED_THEME_TARGET" \
     "$ZED_KEYMAP_TARGET"; do
