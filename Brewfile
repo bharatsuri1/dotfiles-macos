@@ -33,6 +33,7 @@ brew "glow"
 # Batch 4: Editor, AI, and runtime tooling
 brew "neovim"
 brew "uv"
+brew "ollama"
 brew "mise"
 
 # Batch 5: macOS-specific utilities
