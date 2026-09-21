@@ -42,7 +42,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
 | Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
-| 1Password, Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy, Stats | macOS-only GUI applications |
+| 1Password, Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy | macOS-only GUI applications |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |
 | `caffeinate` wrapper | macOS has a native `caffeinate`; Fedora uses `systemd-inhibit` |
@@ -109,9 +109,9 @@ that could also be useful on Fedora but are not yet in the Fedora repo. They
 are not regressions; adding them to Fedora is a future decision, not a parity
 gap that blocks macOS.
 
-`htop`, `jq`, `direnv`, `wget`, `tree`, `hyperfine`, `glow`, `pnpm` (npm),
-`k9s`, `lnav`, `logdy`, `lazysql`, `hl`, `television`, `yazi`, `sevenzip`,
-`vivid`, `bash-completion`, `allure`, `ffmpeg-full`, `imagemagick-full`,
+`jq`, `direnv`, `wget`, `hyperfine`, `glow`, `pnpm` (npm),
+`k9s`, `lnav`, `logdy`, `lazysql`, `yazi`, `sevenzip`,
+`vivid`, `allure`, `ffmpeg-full`, `imagemagick-full`,
 `poppler`, `resvg`
 
 ### Fedora-only (not on macOS)
