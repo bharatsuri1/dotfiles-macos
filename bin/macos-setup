@@ -9,6 +9,7 @@ readonly LIB_DIR="$REPO_ROOT/lib/macos-setup"
 for module in \
   common \
   homebrew \
+  ollama \
   macos-defaults \
   chrome-defaults \
   shell-tools \
@@ -36,6 +37,7 @@ Commands:
   status         Report installed and managed state
   apply          Run every setup phase in dependency order
   homebrew       Install Homebrew if needed, then run the managed Brewfile
+  ollama         Start the Ollama login service (brew services)
   macos-defaults Apply reviewed macOS defaults (keyboard, Finder, Dock, trackpad, screenshots, menu bar, general UI)
   chrome-defaults Apply managed Chrome policies (no default-browser prompt, block notifications, no password manager)
   shell-tools    Install pinned Zsh plugins directly without a plugin manager
@@ -71,6 +73,7 @@ main() {
     status) show_status ;;
     apply)
       install_homebrew
+      install_ollama
       install_macos_defaults
       install_chrome_defaults
       install_shell_tools
@@ -86,6 +89,7 @@ main() {
       install_herdr
       ;;
     homebrew) install_homebrew ;;
+    ollama) install_ollama ;;
     macos-defaults) install_macos_defaults ;;
     chrome-defaults) install_chrome_defaults ;;
     shell-tools) install_shell_tools ;;

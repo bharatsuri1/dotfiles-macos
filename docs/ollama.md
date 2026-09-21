@@ -1,8 +1,9 @@
 # Ollama
 
-Managed as the CLI formula `brew "ollama"` (Brewfile, Batch 4). The server is
-run on demand (`ollama serve`) or as a login service (`brew services start
-ollama`).
+Managed as the CLI formula `brew "ollama"` (Brewfile, Batch 4). The
+`macos-setup ollama` phase starts it as a login service via
+`brew services start ollama` (idempotent; `apply` runs it right after the
+homebrew phase).
 
 ## Why not the official installer
 
