@@ -52,6 +52,7 @@ Each phase can also run independently:
 
 ```bash
 ./bin/macos-setup homebrew
+./bin/macos-setup ollama
 ./bin/macos-setup macos-defaults
 ./bin/macos-setup chrome-defaults
 ./bin/macos-setup shell-tools
@@ -78,17 +79,19 @@ The managed Zsh setup keeps durable configuration under `config/zsh/` with
 non-interactive tools (editors, launch agents, scripts) see it on PATH;
 `integrations.zsh` loads fzf key-bindings/completion from the active
 `brew --prefix`. Starship renders the prompt, Atuin keeps history
-local-only, and three pinned direct-sourced plugins
-(`zsh-autosuggestions`, `fast-syntax-highlighting`, and `fzf-tab`) replace any plugin
-manager. `fzf-tab` renders the completion menu as an fzf-powered picker. Machine-local overrides belong in `~/.zshenv.local` and
-`~/.config/zsh/local.zsh`, both optional and ignored by Git.
+local-only, and four pinned direct-sourced plugins
+(`zsh-autosuggestions`, `fast-syntax-highlighting`, `fzf-tab`, and
+`zsh-history-substring-search`) replace any plugin manager. `fzf-tab` renders
+the completion menu as an fzf-powered picker. Machine-local overrides belong in
+`~/.zshenv.local` and `~/.config/zsh/local.zsh`, both optional and ignored by Git.
 
 ## Managed configuration
 
 Beyond the shell, the `config` phase currently links Starship, bat, tmux +
 Sesh (with a Vesper status bar and `Ctrl+Space` prefix), Atuin (local-only
-history), and Ghostty (Rose Pine, JetBrainsMono Nerd Font 14, macOS-native
-window chrome with `Opt` as `Alt`). Tmux copies selections to the macOS
+history), and Ghostty (Vesper from `config/ghostty/themes/Vesper`,
+JetBrainsMono Nerd Font 14, macOS-native window chrome with `Opt` as `Alt`,
+Sparkle auto-update off). Tmux copies selections to the macOS
 clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `Prefix Tab` switches to the previous session. The `config` phase also links
 `config/opencode/` (opencode.jsonc, tui.jsonc with the herdr-tui-session
@@ -98,7 +101,7 @@ defaults, and the herdr session-selection integration. It also links managed Pi
 settings and a Vesper statusline extension into `~/.pi/agent/`; the extension
 shows project, Git, model, thinking, context, token, cost, tool, message, and
 agent-activity state and can be toggled with `/statusline`. It also links a
-Codex `dotfiles` profile into `~/.codex/`, selecting gpt-5.6-terra with medium
+Codex `dotfiles` profile into `~/.codex/`, selecting gpt-5.6-sol with low
 reasoning, hooks, and a colored TUI status line; invoke it with
 `codex --profile dotfiles`.
 
@@ -108,8 +111,9 @@ The `nvim` phase links a managed LazyVim configuration with the self-contained
 Vesper colorscheme, matching the terminal palette. The `vscode` phase links a
 Vesper-themed settings.json and macOS keybindings into
 `~/Library/Application Support/Code/User/` and installs the reviewed extension
-allowlist (Vim, remote SSH/containers, ChatGPT, OpenCode, Vesper theme, and
-GitHub integrations). VS Code's Ghostty integration is preconfigured via
+allowlist (Vim, Remote SSH and its edit and explorer extensions, Remote
+Containers, Docker, the containers extension, GitHub Pull Requests, GitHub
+Actions, Vesper, and Excalidraw). VS Code's Ghostty integration is preconfigured via
 `terminal.external.osxExec`. The `cursor` phase links its own managed settings
 and macOS keybindings and maintains an independent extension allowlist. The
 `zed` phase links editor-only settings,
@@ -126,22 +130,23 @@ The `macos-defaults` phase applies reviewed System Settings equivalents via
   (spelling, capitalization, period, quotes, dashes).
 - **Finder**: show hidden files and all extensions, path bar + status bar,
   list view default, search current folder, no extension-change warning,
-  full POSIX path in title, no `.DS_Store` on network volumes, and hide
+  Finder animations off, window title left at the default name (the POSIX-path
+  title is written off), no `.DS_Store` on network volumes, and hide
   external/removable/internal/network volume icons on the Desktop (files
   and folders on the Desktop remain visible).
   (Optional, currently unset: `defaults write com.apple.finder QuitMenuItem -bool true`
   would let `Cmd+Q` quit Finder — including hiding desktop icons — until
   it's relaunched.)
-- **Dock**: 44px tiles, autohide with no delay and no slide animation
-  (snap instant), no recent apps, no Spaces reordering, minimize into app
-  icon.
-- **Trackpad**: tap-to-click and three-finger drag enabled. Mouse pointer
-  acceleration is intentionally left at the OS default.
+- **Dock**: 64px tiles, autohide with no delay and no slide animation
+  (snap instant), no recent apps, no Spaces reordering, minimize into the app
+  icon with the scale effect, and no launch animation.
+- **Trackpad**: tap-to-click, three-finger drag, and a slightly faster scroll
+  speed. Mouse pointer acceleration is intentionally left at the OS default.
 - **Screenshots**: save PNG without shadow or thumbnail preview to
   `$XDG_DATA_HOME/pictures/screenshots` (default `~/.local/share/pictures/screenshots`, created if missing, honors `XDG_SCREENSHOTS_DIR` when set).
 - **Menu bar**: clock shows date and weekday; battery shows percentage.
-- **General UI**: always dark mode, merged titlebar/toolbar, expanded
-  save/print panels, new documents save locally instead of iCloud.
+- **General UI**: always dark mode, reduced motion, merged titlebar/toolbar,
+  expanded save/print panels, new documents save locally instead of iCloud.
 
 Finder, Dock, and SystemUIServer are restarted at the end to take effect
 without logout. Risky settings (quarantine, Siri, Spotlight, Touch ID,
@@ -166,8 +171,9 @@ The `mise` phase installs Node.js globally (`node@latest`). The `npm-tools`
 phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
 `@openai/codex`, `@earendil-works/pi-coding-agent`, and
 `@devcontainers/cli`. Python tooling comes from `uv` (installed via Homebrew);
-`uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The
-`herdr` phase downloads the official installer to a temp file, prints its
+`uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The `ollama`
+phase starts the Homebrew login service. The `herdr` phase downloads the
+official installer to a temp file, prints its
 SHA-256, asks for terminal confirmation before running it (no silent
 curl-bash), and links the managed herdr config with the Vesper theme,
 `prefix+shift+o`/`prefix+shift+u` worktree bindings, "spaces" agent panel,
@@ -182,9 +188,9 @@ The `yazi` phase links the managed configuration at `config/yazi/` —
 self-contained Vesper flavor at `flavors/vesper.yazi/` — into
 `~/.config/yazi/`. The Vesper flavor covers manager, tabs, mode, status,
 pick, input, cmp, tasks, which, help, spot, notify, filetype, and icon
-sections using the palette shared with Zed, Neovim, Alacritty, and
-Quickshell. The `y` shell wrapper (in `config/zsh/aliases.zsh`) changes the
-shell's working directory on Yazi exit (press `q` to accept, `Q` to stay).
+sections using the palette shared with Ghostty, Zed, and Neovim. The `y`
+shell wrapper (in `config/zsh/aliases.zsh`) changes the shell's working
+directory on Yazi exit (press `q` to accept, `Q` to stay).
 
 ## Scope
 

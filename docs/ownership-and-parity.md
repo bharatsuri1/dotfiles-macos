@@ -42,7 +42,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
 | Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
-| 1Password, Raycast, Notion, Cleanshot, Homerow, Little Snitch, Logi Options+, Vial, Bazecor, Alcove, Antinote, Handy | macOS-only GUI applications |
+| 1Password, Google Chrome, Raycast, Cleanshot, Homerow, Little Snitch, Logi Options+, Bazecor, Alcove, Antinote, Handy, Copilot Money, Proton VPN, Discord, ChatGPT, OrbStack, LocalSend, Signal | macOS-only GUI applications |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |
 | `caffeinate` wrapper | macOS has a native `caffeinate`; Fedora uses `systemd-inhibit` |
@@ -67,8 +67,8 @@ as the baseline). No shared symlink or submodule couples them.
 |------|-------|--------|--------|
 | VS Code `keybindings.json` | `cmd+` keys (navigate, code nav, tasks) | `ctrl+` keys (copy/cut/paste, quickOpen, terminal, sidebar) | macOS reserves `ctrl+` for emacs-style text navigation; `cmd+` is the macOS convention. Fedora uses `ctrl+` as the Linux convention. |
 | VS Code terminal profile | `zsh -l` (native login shell) | `flatpak-spawn --host zsh` (VS Code runs as a Flatpak) | Fedora VS Code is sandboxed; needs host spawn |
-| Zsh `codex` aliases | `cx`/`sol`/`terra` without bypass flags | `cx`/`sol`/`terra` with `--dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust` | macOS retains Codex safety guardrails; Fedora opts into fully autonomous mode |
-| Neovim lockfile | `config/nvim/lazy-lock.json` (macOS) | `config/nvim/lazy-lock.json` (Fedora) | Separate dotfiles; lockfiles are gitignored-by-design per the user and are not reconciled |
+| Zsh `codex` aliases | `cx` passes `--dangerously-bypass-approvals-and-sandbox` and `--dangerously-bypass-hook-trust`; `sol`, `terra`, and `luna` call `cx` | `cx`/`sol`/`terra` with `--dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust` | The macOS aliases currently pass the bypass flags too |
+| Neovim lockfile | `config/nvim/lazy-lock.json` is tracked | `config/nvim/lazy-lock.json` (Fedora) | Separate checkouts, so the lockfiles are not reconciled. `config/nvim/lazyvim.json` is gitignored on macOS |
 | `lazyvim.json` | Retained (macOS-only, gitignored) | Not present | macOS-specific snapshot; gitignored by design |
 
 ## Developer CLI package parity audit
@@ -111,6 +111,7 @@ are not regressions; adding them to Fedora is a future decision, not a parity
 gap that blocks macOS.
 
 `jq`, `direnv`, `wget`, `hyperfine`, `glow`, `pnpm` (npm),
+`@devcontainers/cli` (npm),
 `k9s`, `lnav`, `logdy`, `lazysql`, `yazi`, `sevenzip`,
 `vivid`, `allure`, `ffmpeg-full`, `imagemagick-full`,
 `poppler`, `resvg`
