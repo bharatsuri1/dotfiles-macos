@@ -8,6 +8,7 @@ install_config() {
   link_config "$REPO_ROOT/config/atuin/config.toml" "$HOME/.config/atuin/config.toml"
   link_config "$REPO_ROOT/config/mise/config.toml" "$HOME/.config/mise/config.toml"
   link_config "$REPO_ROOT/config/ghostty/config" "$HOME/.config/ghostty/config"
+  link_config "$REPO_ROOT/config/ghostty/themes/Vesper" "$HOME/.config/ghostty/themes/Vesper"
   link_config "$REPO_ROOT/bin/macos-update" "$HOME/.local/bin/macos-update"
   link_config "$REPO_ROOT/config/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
   link_config "$REPO_ROOT/config/opencode/tui.jsonc" "$HOME/.config/opencode/tui.jsonc"

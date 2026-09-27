@@ -73,6 +73,7 @@ EOF
     "$HOME/.config/atuin/config.toml" \
     "$HOME/.config/mise/config.toml" \
     "$HOME/.config/ghostty/config" \
+    "$HOME/.config/ghostty/themes/Vesper" \
     "$HOME/.config/fastfetch/config.jsonc" \
     "$HOME/.config/herdr/config.toml" \
     "$HOME/.config/nvim" \
