@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Link this into ~/.local/bin and run `macos-update` to pull the latest
-# dotfiles, re-run the setup from inside the repo, then update Homebrew packages.
+# dotfiles, re-run the setup from inside the repo, then upgrade Brewfile packages.
 set -Eeuo pipefail
 
 readonly REPOSITORY_URL="${DOTFILES_MACOS_REPOSITORY_URL:-https://github.com/bharatsuri1/dotfiles-macos.git}"
@@ -33,9 +33,36 @@ fi
 log 'running the macOS setup from the repo'
 DOTFILES_MACOS_ASSUME_YES=1 "$INSTALL_ROOT/bin/macos-setup" apply
 
-if command -v brew &>/dev/null; then
-  log 'updating Homebrew packages'
-  brew update && brew upgrade -y
-fi
+# shellcheck source=/dev/null
+source "$INSTALL_ROOT/lib/macos-setup/homebrew.sh"
+ensure_brew_on_path
+command -v brew >/dev/null 2>&1 || die 'Homebrew is missing after setup'
+
+upgrade_brewfile_group() {
+  local kind="$1"
+  local list
+  local -a names=()
+  local name
+  list="$(brew bundle list "--${kind}" --file "$INSTALL_ROOT/Brewfile")"
+  while IFS= read -r name; do
+    [[ -n "$name" ]] || continue
+    names+=("$name")
+  done <<< "$list"
+
+  ((${#names[@]})) || return 0
+
+  if [[ "$kind" == cask ]]; then
+    log "upgrading ${#names[@]} Homebrew casks from the Brewfile"
+    brew upgrade -y --cask "${names[@]}"
+  else
+    log "upgrading ${#names[@]} Homebrew formulae from the Brewfile"
+    brew upgrade -y "${names[@]}"
+  fi
+}
+
+log 'updating Homebrew'
+brew update
+upgrade_brewfile_group formula
+upgrade_brewfile_group cask
 
 log 'all updates complete'
