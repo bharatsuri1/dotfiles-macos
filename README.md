@@ -171,7 +171,8 @@ phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
 SHA-256, asks for terminal confirmation before running it (no silent
 curl-bash), and links the managed herdr config with the Vesper theme,
 `prefix+shift+o`/`prefix+shift+u` worktree bindings, "spaces" agent panel,
-dot status indicators, no sound, and `onboarding=false`.
+dot status indicators, no sound, and `onboarding=false`. `macos-update` sets
+`DOTFILES_MACOS_ASSUME_YES=1`, which skips that confirmation.
 
 ## Yazi
 

@@ -51,6 +51,11 @@ Commands:
   zed            Link managed Zed editor settings, macOS keybindings, and Vesper theme
   yazi           Link the managed Yazi configuration with the Vesper flavor
   herdr          Link herdr config, then run the audited official herdr installer
+
+Environment:
+  DOTFILES_MACOS_ASSUME_YES=1
+      Skip confirm prompts and log them as assumed yes.
+      There is no --yes flag. macos-update sets this variable.
 USAGE
 }
 
