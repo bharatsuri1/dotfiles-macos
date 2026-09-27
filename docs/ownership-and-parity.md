@@ -110,7 +110,7 @@ that could also be useful on Fedora but are not yet in the Fedora repo. They
 are not regressions; adding them to Fedora is a future decision, not a parity
 gap that blocks macOS.
 
-`jq`, `direnv`, `wget`, `hyperfine`, `glow`, `pnpm` (npm),
+`jq`, `direnv`, `wget`, `hyperfine`, `glow`, `dust`, `pnpm` (npm),
 `@devcontainers/cli` (npm),
 `k9s`, `lnav`, `logdy`, `lazysql`, `yazi`, `sevenzip`,
 `vivid`, `allure`, `ffmpeg-full`, `imagemagick-full`,
