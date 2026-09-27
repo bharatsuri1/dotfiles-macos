@@ -55,8 +55,8 @@ shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 
 # Links / updates
 link-url = true
-auto-update = download
-auto-update-channel = stable
+# Homebrew owns the cask, so Ghostty's Sparkle updater stays off.
+auto-update = off
 
 # Keybinds
 keybind = shift+enter=text:\x1b\r
