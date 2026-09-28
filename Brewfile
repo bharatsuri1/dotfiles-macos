@@ -30,6 +30,7 @@ brew "jless"
 brew "xh"
 brew "hyperfine"
 brew "glow"
+brew "shellcheck"
 
 # Batch 4: Editor, AI, and runtime tooling
 brew "neovim"
