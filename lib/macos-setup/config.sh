@@ -16,4 +16,13 @@ install_config() {
   link_config "$REPO_ROOT/config/pi/settings.json" "$HOME/.pi/agent/settings.json"
   link_config "$REPO_ROOT/config/pi/extensions/statusline.ts" "$HOME/.pi/agent/extensions/statusline.ts"
   link_config "$REPO_ROOT/config/codex/dotfiles.config.toml" "$HOME/.codex/dotfiles.config.toml"
+  install_repo_hook
+}
+
+install_repo_hook() {
+  if [[ ! -d "$REPO_ROOT/.git" ]]; then
+    log 'skipping pre-commit hook; this checkout has no .git directory'
+    return
+  fi
+  link_config "$REPO_ROOT/hooks/pre-commit" "$REPO_ROOT/.git/hooks/pre-commit"
 }

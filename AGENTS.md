@@ -13,8 +13,9 @@ There is no build step. Validate changes from the repository root:
 - `./bin/macos-setup --help` checks CLI loading and command documentation.
 - `./bin/macos-setup status` reports current managed state.
 - `./bin/macos-setup --dry-run apply` previews setup without mutation (macOS required). There is no `--yes` flag. `confirm` prompts on the terminal unless `DOTFILES_MACOS_ASSUME_YES=1`, which `macos-update` sets so `apply` can finish unattended. Other state-changing commands use each tool's own non-interactive flags (for example `brew upgrade` does not prompt).
-- `shellcheck bootstrap.sh bin/macos-setup lib/macos-setup/*.sh` performs static Bash analysis when ShellCheck is installed.
-- `bash -n bootstrap.sh bin/macos-setup lib/macos-setup/*.sh` checks shell syntax.
+- `shellcheck --shell=bash bootstrap.sh bin/macos-setup bin/macos-update lib/macos-setup/*.sh` performs static Bash analysis. The homebrew phase installs ShellCheck.
+- `bash -n bootstrap.sh bin/macos-setup bin/macos-update lib/macos-setup/*.sh` checks shell syntax.
+- The config phase links `hooks/pre-commit` to `.git/hooks/pre-commit` in this checkout. That hook runs both commands above.
 
 Run a focused dry-run command, such as `./bin/macos-setup --dry-run homebrew`, for the phase you changed.
 

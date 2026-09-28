@@ -11,7 +11,8 @@ homebrew_prefix() {
 }
 
 brew_shellenv() {
-  local brew_bin="$(homebrew_prefix)/bin/brew"
+  local brew_bin
+  brew_bin="$(homebrew_prefix)/bin/brew"
   [[ -x "$brew_bin" ]] || return 1
   eval "$("$brew_bin" shellenv)"
 }
@@ -28,6 +29,8 @@ install_homebrew() {
   else
     log 'installing Homebrew with the official installer'
     if $DRY_RUN; then
+      # Printed as a dry-run command, not expanded.
+      # shellcheck disable=SC2016
       printf '+ /bin/bash -c "$(curl -fsSL %s)"\n' "$HOMEBREW_INSTALLER_URL"
     else
       /bin/bash -c "$(curl -fsSL "$HOMEBREW_INSTALLER_URL")"

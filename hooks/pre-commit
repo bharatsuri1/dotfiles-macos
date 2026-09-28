@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Git runs this with a short PATH. ShellCheck is installed by the homebrew phase.
+set -Eeuo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+cd "$root"
+
+shellcheck_bin() {
+  if command -v shellcheck >/dev/null 2>&1; then
+    command -v shellcheck
+    return
+  fi
+
+  local prefix
+  if [[ "$(uname -m)" == arm64 ]]; then
+    prefix="/opt/homebrew"
+  else
+    prefix="/usr/local"
+  fi
+  if [[ -x "$prefix/bin/shellcheck" ]]; then
+    printf '%s\n' "$prefix/bin/shellcheck"
+    return
+  fi
+  return 1
+}
+
+if ! checker="$(shellcheck_bin)"; then
+  printf 'error: shellcheck is missing; run ./bin/macos-setup homebrew\n' >&2
+  exit 1
+fi
+
+shell_files=(
+  bootstrap.sh
+  bin/macos-setup
+  bin/macos-update
+)
+for shell_file in lib/macos-setup/*.sh; do
+  shell_files+=("$shell_file")
+done
+
+bash -n "${shell_files[@]}"
+"$checker" --shell=bash "${shell_files[@]}"

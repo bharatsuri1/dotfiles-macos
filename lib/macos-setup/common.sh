@@ -1,4 +1,6 @@
 readonly STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles-macos"
+# Used by link_config in shell.sh.
+# shellcheck disable=SC2034
 readonly BACKUP_ROOT="$STATE_DIR/backups"
 
 DRY_RUN=false
@@ -6,6 +8,8 @@ ASSUME_YES=false
 if [[ "${DOTFILES_MACOS_ASSUME_YES:-}" == 1 ]]; then
   ASSUME_YES=true
 fi
+# Used by link_config in shell.sh.
+# shellcheck disable=SC2034
 BACKUP_DIR=""
 
 log() {

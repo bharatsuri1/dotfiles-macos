@@ -85,6 +85,7 @@ EOF
     "$HOME/.config/opencode/tui.jsonc" \
     "$HOME/.config/opencode/herdr-tui-session.js" \
     "$HOME/.local/bin/macos-update" \
+    "$REPO_ROOT/.git/hooks/pre-commit" \
     "$VSCODE_SETTINGS_TARGET" \
     "$VSCODE_KEYBINDINGS_TARGET" \
     "$CURSOR_SETTINGS_TARGET" \
