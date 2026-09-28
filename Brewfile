@@ -65,6 +65,7 @@ cask "alcove"
 cask "antinote"
 cask "handy"
 cask "signal"
+cask "pearcleaner"
 cask "font-jetbrains-mono-nerd-font"
 
 # Batch 6: Media and imaging

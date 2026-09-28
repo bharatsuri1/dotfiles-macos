@@ -42,7 +42,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
 | Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
-| 1Password, Google Chrome, Raycast, Cleanshot, Homerow, Little Snitch, Logi Options+, Bazecor, Alcove, Antinote, Handy, Copilot Money, Proton VPN, Discord, ChatGPT, OrbStack, LocalSend, Signal | macOS-only GUI applications |
+| 1Password, Google Chrome, Raycast, Cleanshot, Homerow, Little Snitch, Logi Options+, Bazecor, Alcove, Antinote, Handy, Copilot Money, Proton VPN, Discord, ChatGPT, OrbStack, LocalSend, Signal, Pearcleaner | macOS-only GUI applications |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |
 | `caffeinate` wrapper | macOS has a native `caffeinate`; Fedora uses `systemd-inhibit` |
