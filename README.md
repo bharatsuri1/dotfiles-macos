@@ -28,6 +28,10 @@ curl -fsSL https://raw.githubusercontent.com/bharatsuri1/dotfiles-macos/main/boo
   | bash -s -- --dry-run apply
 ```
 
+`--dry-run` skips the clone or pull and the global Git identity writes. When the
+checkout already exists, the setup phases still preview. When it does not,
+bootstrap stops after printing those steps.
+
 ## CLI
 
 After bootstrapping, rerun the complete setup from the checkout with:
