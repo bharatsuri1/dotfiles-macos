@@ -54,6 +54,7 @@ install_cursor_extensions() {
 }
 
 install_cursor() {
+  section Cursor
   if ! cursor_app_installed && ! $DRY_RUN; then
     die 'Cursor is missing; run the homebrew phase first'
   fi
@@ -66,11 +67,11 @@ install_cursor() {
 }
 
 show_cursor_status() {
-  printf 'Cursor:\n'
+  section Cursor
   if cursor_app_installed; then
-    printf '  [ok]      Cursor\n'
+    report ok "Cursor"
   else
-    printf '  [missing] Cursor\n'
+    report missing "Cursor"
   fi
 
   local target source resolved
@@ -84,24 +85,24 @@ show_cursor_status() {
       resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
     fi
     if [[ "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
-      printf '  [linked]  %s\n' "$target"
+      report linked "$target"
     elif [[ -L "$target" && -z "$resolved" ]]; then
-      printf '  [broken]  %s\n' "$target"
+      report broken "$target"
     elif [[ -L "$target" ]]; then
-      printf '  [wrong]   %s -> %s\n' "$target" "$resolved"
+      report wrong "$target -> $resolved"
     elif [[ -e "$target" ]]; then
-      printf '  [local]   %s\n' "$target"
+      report local "$target"
     else
-      printf '  [missing] %s\n' "$target"
+      report missing "$target"
     fi
   done
 
   local ext
   for ext in "${CURSOR_EXTENSIONS[@]}"; do
     if cursor_extension_installed "$ext"; then
-      printf '  [ok]      extension %s\n' "$ext"
+      report ok "extension $ext"
     else
-      printf '  [missing] extension %s\n' "$ext"
+      report missing "extension $ext"
     fi
   done
 }

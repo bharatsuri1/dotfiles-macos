@@ -6,6 +6,7 @@ yazi_installed() {
 }
 
 install_yazi() {
+  section Yazi
   if ! yazi_installed && ! $DRY_RUN; then
     die 'Yazi is missing; run the homebrew phase first'
   fi
@@ -17,11 +18,11 @@ install_yazi() {
 }
 
 show_yazi_status() {
-  printf 'Yazi:\n'
+  section Yazi
   if yazi_installed; then
-    printf '  [ok]      %s\n' "$(command -v yazi)"
+    report ok "$(command -v yazi)"
   else
-    printf '  [missing] yazi\n'
+    report missing "yazi"
   fi
 
   local resolved=""
@@ -29,21 +30,21 @@ show_yazi_status() {
     resolved="$(readlink -f -- "$YAZI_CONFIG_TARGET" 2>/dev/null || true)"
   fi
   if [[ "$resolved" == "$(readlink -f -- "$YAZI_CONFIG_SOURCE" 2>/dev/null || true)" ]]; then
-    printf '  [linked]  %s\n' "$YAZI_CONFIG_TARGET"
+    report linked "$YAZI_CONFIG_TARGET"
   elif [[ -L "$YAZI_CONFIG_TARGET" && -z "$resolved" ]]; then
-    printf '  [broken]  %s\n' "$YAZI_CONFIG_TARGET"
+    report broken "$YAZI_CONFIG_TARGET"
   elif [[ -L "$YAZI_CONFIG_TARGET" ]]; then
-    printf '  [wrong]   %s -> %s\n' "$YAZI_CONFIG_TARGET" "$resolved"
+    report wrong "$YAZI_CONFIG_TARGET -> $resolved"
   elif [[ -e "$YAZI_CONFIG_TARGET" ]]; then
-    printf '  [local]   %s\n' "$YAZI_CONFIG_TARGET"
+    report local "$YAZI_CONFIG_TARGET"
   else
-    printf '  [missing] %s\n' "$YAZI_CONFIG_TARGET"
+    report missing "$YAZI_CONFIG_TARGET"
   fi
 
   # The `y` wrapper is shell-config owned; report whether the managed alias file defines it.
   if grep -q "command yazi" "$REPO_ROOT/config/zsh/aliases.zsh" 2>/dev/null; then
-    printf '  [alias]   y -> yazi (cwd-aware wrapper)\n'
+    report alias "y -> yazi (cwd-aware wrapper)"
   else
-    printf '  [missing] y wrapper in managed zsh aliases\n'
+    report missing "y wrapper in managed zsh aliases"
   fi
 }

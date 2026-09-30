@@ -1,4 +1,5 @@
 install_ollama() {
+  section Ollama
   if ! command -v ollama >/dev/null 2>&1; then
     if $DRY_RUN; then
       log 'ollama is not installed; would start the brew service'

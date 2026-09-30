@@ -18,24 +18,10 @@ while (($#)); do
   esac
 done
 
-log() {
-  printf '==> %s\n' "$*"
-}
-
-die() {
-  printf 'error: %s\n' "$*" >&2
-  exit 1
-}
-
-run() {
-  if $DRY_RUN; then
-    printf '+ '
-    printf '%q ' "$@"
-    printf '\n'
-  else
-    "$@"
-  fi
-}
+_bootstrap_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "$_bootstrap_dir/lib/macos-setup/output.sh"
+unset _bootstrap_dir
 
 [[ "$(uname -s)" == Darwin ]] || die 'this bootstrap currently supports macOS only'
 
@@ -50,6 +36,7 @@ if ! command -v git >/dev/null 2>&1 || ! xcode-select --print-path >/dev/null 2>
   die 're-run this bootstrap after the Command Line Tools installation completes'
 fi
 
+section Checkout
 if [[ -d "$INSTALL_ROOT/.git" ]]; then
   log "updating existing checkout at $INSTALL_ROOT"
   current_branch="$(git -C "$INSTALL_ROOT" symbolic-ref --quiet --short HEAD)" ||
@@ -65,6 +52,7 @@ else
   run git clone "$REPOSITORY_URL" "$INSTALL_ROOT"
 fi
 
+section "Git defaults"
 log 'configuring Git defaults'
 
 run git config --global user.name "$GIT_NAME"
@@ -85,6 +73,7 @@ if $DRY_RUN && [[ ! -d "$INSTALL_ROOT/.git" ]]; then
   exit 0
 fi
 
+section Setup
 log 'starting the guided macOS setup'
 if ((${#setup_args[@]})); then
   exec "$INSTALL_ROOT/bin/macos-setup" "${setup_args[@]}"

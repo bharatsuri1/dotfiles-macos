@@ -12,6 +12,7 @@ npm_tool_installed() {
 }
 
 install_npm_tools() {
+  section "npm tools"
   if ! command -v npm >/dev/null 2>&1; then
     if $DRY_RUN; then
       log 'npm is not on PATH; would still install global tools'
@@ -40,13 +41,13 @@ install_npm_tools() {
 }
 
 show_npm_tools_status() {
-  printf 'Mise-managed npm tools:\n'
+  section "npm tools"
   local item
   for item in "${NPM_TOOLS[@]}"; do
     if command -v npm >/dev/null 2>&1 && npm_tool_installed "$item"; then
-      printf '  [ok]      %s\n' "$item"
+      report ok "$item"
     else
-      printf '  [missing] %s\n' "$item"
+      report missing "$item"
     fi
   done
 }

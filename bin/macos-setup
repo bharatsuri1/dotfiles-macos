@@ -9,6 +9,7 @@ readonly REPO_ROOT
 readonly LIB_DIR="$REPO_ROOT/lib/macos-setup"
 
 for module in \
+  output \
   common \
   homebrew \
   ollama \
@@ -117,6 +118,8 @@ main() {
     herdr) install_herdr ;;
     *) usage >&2; die "unknown command: $command" ;;
   esac
+
+  output_summary
 }
 
 main "$@"

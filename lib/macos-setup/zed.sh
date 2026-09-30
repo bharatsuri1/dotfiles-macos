@@ -17,6 +17,7 @@ link_zed_config() {
 }
 
 install_zed() {
+  section Zed
   if ! zed_app_installed && ! $DRY_RUN; then
     die 'Zed is missing; run the homebrew phase first'
   fi
@@ -28,11 +29,11 @@ install_zed() {
 }
 
 show_zed_status() {
-  printf 'Zed:\n'
+  section Zed
   if zed_app_installed; then
-    printf '  [ok]      Zed\n'
+    report ok "Zed"
   else
-    printf '  [missing] Zed\n'
+    report missing "Zed"
   fi
 
   local target source resolved
@@ -48,15 +49,15 @@ show_zed_status() {
       resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
     fi
     if [[ -n "$source" && "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
-      printf '  [linked]  %s\n' "$target"
+      report linked "$target"
     elif [[ -L "$target" && -z "$resolved" ]]; then
-      printf '  [broken]  %s\n' "$target"
+      report broken "$target"
     elif [[ -L "$target" ]]; then
-      printf '  [wrong]   %s -> %s\n' "$target" "$resolved"
+      report wrong "$target -> $resolved"
     elif [[ -e "$target" ]]; then
-      printf '  [local]   %s\n' "$target"
+      report local "$target"
     else
-      printf '  [missing] %s\n' "$target"
+      report missing "$target"
     fi
   done
 }

@@ -58,6 +58,7 @@ install_vscode_extensions() {
 }
 
 install_vscode() {
+  section "VS Code"
   if ! vscode_app_installed && ! $DRY_RUN; then
     die 'VS Code is missing; run the homebrew phase first'
   fi
@@ -70,11 +71,11 @@ install_vscode() {
 }
 
 show_vscode_status() {
-  printf 'VS Code:\n'
+  section "VS Code"
   if vscode_app_installed; then
-    printf '  [ok]      Visual Studio Code\n'
+    report ok "Visual Studio Code"
   else
-    printf '  [missing] Visual Studio Code\n'
+    report missing "Visual Studio Code"
   fi
 
   local target source resolved
@@ -89,15 +90,15 @@ show_vscode_status() {
       resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
     fi
     if [[ -n "$source" && "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
-      printf '  [linked]  %s\n' "$target"
+      report linked "$target"
     elif [[ -L "$target" && -z "$resolved" ]]; then
-      printf '  [broken]  %s\n' "$target"
+      report broken "$target"
     elif [[ -L "$target" ]]; then
-      printf '  [wrong]   %s -> %s\n' "$target" "$resolved"
+      report wrong "$target -> $resolved"
     elif [[ -e "$target" ]]; then
-      printf '  [local]   %s\n' "$target"
+      report local "$target"
     else
-      printf '  [missing] %s\n' "$target"
+      report missing "$target"
     fi
   done
 
@@ -105,12 +106,12 @@ show_vscode_status() {
     local ext
     for ext in "${VSCODE_EXTENSIONS[@]}"; do
       if vscode_extension_installed "$ext"; then
-        printf '  [ok]      extension %s\n' "$ext"
+        report ok "extension $ext"
       else
-        printf '  [missing] extension %s\n' "$ext"
+        report missing "extension $ext"
       fi
     done
   else
-    printf '  [ok]      extension allowlist empty\n'
+    report ok "extension allowlist empty"
   fi
 }

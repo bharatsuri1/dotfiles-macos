@@ -22,6 +22,7 @@ ensure_brew_on_path() {
 }
 
 install_homebrew() {
+  section Homebrew
   ensure_brew_on_path
 
   if command -v brew >/dev/null 2>&1; then

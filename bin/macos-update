@@ -6,15 +6,10 @@ set -Eeuo pipefail
 readonly REPOSITORY_URL="${DOTFILES_MACOS_REPOSITORY_URL:-https://github.com/bharatsuri1/dotfiles-macos.git}"
 readonly INSTALL_ROOT="${DOTFILES_MACOS_INSTALL_ROOT:-$HOME/.local/share/dotfiles-macos}"
 
-log() {
-  printf '==> %s\n' "$*"
-}
+# shellcheck source=/dev/null
+source "$INSTALL_ROOT/lib/macos-setup/output.sh"
 
-die() {
-  printf 'error: %s\n' "$*" >&2
-  exit 1
-}
-
+section Checkout
 if [[ -d "$INSTALL_ROOT/.git" ]]; then
   log "updating existing checkout at $INSTALL_ROOT"
   current_branch="$(git -C "$INSTALL_ROOT" symbolic-ref --quiet --short HEAD)" ||
@@ -30,6 +25,7 @@ else
   git clone "$REPOSITORY_URL" "$INSTALL_ROOT"
 fi
 
+section Setup
 log 'running the macOS setup from the repo'
 DOTFILES_MACOS_ASSUME_YES=1 "$INSTALL_ROOT/bin/macos-setup" apply
 
@@ -60,9 +56,10 @@ upgrade_brewfile_group() {
   fi
 }
 
+section Homebrew
 log 'updating Homebrew'
 brew update
 upgrade_brewfile_group formula
 upgrade_brewfile_group cask
 
-log 'all updates complete'
+output_summary

@@ -1,26 +1,27 @@
 show_status() {
-  printf 'macOS: %s %s (%s)\n' "$(sw_vers -productName)" "$(sw_vers -productVersion)" "$(uname -m)"
-  printf 'Checkout: %s\n' "$REPO_ROOT"
-  printf 'Login shell: %s\n' "${SHELL:-unknown}"
+  section Machine
+  report ok "$(sw_vers -productName) $(sw_vers -productVersion) ($(uname -m))"
+  report local "checkout $REPO_ROOT"
+  report local "login shell ${SHELL:-unknown}"
 
   ensure_brew_on_path
-  printf 'Homebrew:\n'
+  section Homebrew
   if command -v brew >/dev/null 2>&1; then
-    printf '  [ok]      %s\n' "$(brew --version | head -n 1)"
+    report ok "$(brew --version | head -n 1)"
     if brew bundle check --file "$REPO_ROOT/Brewfile" >/dev/null 2>&1; then
-      printf '  [ok]      Brewfile satisfied\n'
+      report ok "Brewfile satisfied"
     else
-      printf '  [missing] Brewfile unmet; run macos-setup homebrew\n'
+      report missing "Brewfile unmet; run macos-setup homebrew"
     fi
   else
-    printf '  [missing] Homebrew\n'
+    report missing "Homebrew"
   fi
 
-  printf 'Mise:\n'
+  section Mise
   if mise_installed; then
-    printf '  [ok]      %s\n' "$(command -v mise)"
+    report ok "$(command -v mise)"
   else
-    printf '  [missing] mise\n'
+    report missing "mise"
   fi
 
   show_npm_tools_status
@@ -37,15 +38,15 @@ show_status() {
 
   show_yazi_status
 
-  printf 'Zsh plugins:\n'
+  section "Zsh plugins"
   local plugin revision destination
   while read -r plugin revision; do
     destination="$ZSH_PLUGIN_ROOT/$plugin"
     if [[ -d "$destination/.git" ]] &&
       [[ "$(git -C "$destination" rev-parse HEAD 2>/dev/null || true)" == "$revision" ]]; then
-      printf '  [pinned]  %s @ %s\n' "$plugin" "${revision:0:7}"
+      report pinned "$plugin @ ${revision:0:7}"
     else
-      printf '  [missing] %s @ %s\n' "$plugin" "${revision:0:7}"
+      report missing "$plugin @ ${revision:0:7}"
     fi
   done <<EOF
 zsh-autosuggestions $AUTOSUGGESTIONS_REVISION
@@ -54,7 +55,7 @@ fzf-tab $FZF_TAB_REVISION
 zsh-history-substring-search $HISTORY_SUBSTRING_SEARCH_REVISION
 EOF
 
-  printf 'Configuration:\n'
+  section Configuration
   local target
   for target in \
     "$HOME/.zshenv" \
@@ -94,9 +95,9 @@ EOF
     "$ZED_THEME_TARGET" \
     "$ZED_KEYMAP_TARGET"; do
     if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$REPO_ROOT"/* ]]; then
-      printf '  [linked]  %s\n' "$target"
+      report linked "$target"
     else
-      printf '  [local]   %s\n' "$target"
+      report local "$target"
     fi
   done
 }

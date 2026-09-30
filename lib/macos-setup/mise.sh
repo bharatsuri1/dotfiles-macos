@@ -5,6 +5,7 @@ mise_installed() {
 }
 
 install_mise() {
+  section Mise
   if ! mise_installed && ! $DRY_RUN; then
     die 'mise is missing; run the homebrew phase first'
   fi

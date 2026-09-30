@@ -2,6 +2,7 @@ readonly HERDR_INSTALLER_URL="https://herdr.dev/install.sh"
 readonly HERDR_BINARY="$HOME/.local/bin/herdr"
 
 install_herdr() {
+  section Herdr
   link_config "$REPO_ROOT/config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 
   if [[ -x "$HERDR_BINARY" ]]; then
@@ -32,11 +33,11 @@ install_herdr() {
 }
 
 show_herdr_status() {
-  printf 'Herdr:\n'
+  section Herdr
   if [[ -x "$HERDR_BINARY" ]]; then
-    printf '  [ok]      %s\n' "$HERDR_BINARY"
+    report ok "$HERDR_BINARY"
   else
-    printf '  [missing] %s\n' "$HERDR_BINARY"
+    report missing "$HERDR_BINARY"
   fi
 
   local target="$HOME/.config/herdr/config.toml"
@@ -46,14 +47,14 @@ show_herdr_status() {
     resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
   fi
   if [[ "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
-    printf '  [linked]  %s\n' "$target"
+    report linked "$target"
   elif [[ -L "$target" && -z "$resolved" ]]; then
-    printf '  [broken]  %s\n' "$target"
+    report broken "$target"
   elif [[ -L "$target" ]]; then
-    printf '  [wrong]   %s -> %s\n' "$target" "$resolved"
+    report wrong "$target -> $resolved"
   elif [[ -e "$target" ]]; then
-    printf '  [local]   %s\n' "$target"
+    report local "$target"
   else
-    printf '  [missing] %s\n' "$target"
+    report missing "$target"
   fi
 }

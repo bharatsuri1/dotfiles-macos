@@ -112,6 +112,7 @@ apply_general_defaults() {
 }
 
 install_macos_defaults() {
+  section "macOS defaults"
   apply_keyboard_defaults
   apply_finder_defaults
   apply_dock_defaults

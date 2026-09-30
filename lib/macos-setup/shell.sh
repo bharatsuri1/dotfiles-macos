@@ -10,7 +10,7 @@ link_config() {
   local target="$2"
 
   if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
-    log "$target already linked"
+    report linked "$target"
     return
   fi
 
@@ -20,12 +20,14 @@ link_config() {
     local backup="$BACKUP_DIR/${target#"$HOME"/}"
     run mkdir -p "$(dirname -- "$backup")"
     run mv -- "$target" "$backup"
-    log "backed up $target to $backup"
+    report backup "$target -> $backup"
   fi
   run ln -s "$source" "$target"
+  report linked "$target"
 }
 
 install_shell() {
+  section Shell
   link_config "$REPO_ROOT/config/zsh/zshenv" "$HOME/.zshenv"
   link_config "$REPO_ROOT/config/zsh/zshrc" "$HOME/.config/zsh/.zshrc"
 
@@ -38,6 +40,6 @@ install_shell() {
     [[ ! -r "$ZSH_PLUGIN_ROOT/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ]] ||
     [[ ! -r "$ZSH_PLUGIN_ROOT/fzf-tab/fzf-tab.plugin.zsh" ]] ||
     [[ ! -r "$ZSH_PLUGIN_ROOT/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
-    log 'pinned Zsh plugins are not installed; run the shell-tools phase first'
+    report missing 'pinned Zsh plugins are not installed; run the shell-tools phase first'
   fi
 }
