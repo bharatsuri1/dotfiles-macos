@@ -16,3 +16,17 @@ install_ollama() {
   log 'starting ollama login service'
   run brew services start ollama
 }
+
+show_ollama_status() {
+  section Ollama
+  if ! command -v ollama >/dev/null 2>&1; then
+    report missing "ollama; run macos-setup homebrew"
+    return
+  fi
+  report ok "$(command -v ollama)"
+  if brew services list 2>/dev/null | awk '$1 == "ollama" && $2 == "started"' | grep -q .; then
+    report ok "login service started"
+  else
+    report missing "login service; run macos-setup ollama"
+  fi
+}

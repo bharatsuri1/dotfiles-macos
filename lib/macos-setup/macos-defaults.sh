@@ -111,6 +111,114 @@ apply_general_defaults() {
   defaults_write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 }
 
+_defaults_bool() {
+  local value
+  value="$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')"
+  case "$value" in
+    1 | true | yes) printf true ;;
+    0 | false | no) printf false ;;
+    *) printf '%s' "$value" ;;
+  esac
+}
+
+defaults_matches() {
+  local type="$1" expected="$2" actual="$3"
+  [[ -n "$actual" ]] || return 1
+  case "$type" in
+    bool) [[ "$(_defaults_bool "$expected")" == "$(_defaults_bool "$actual")" ]] ;;
+    int) [[ "$actual" =~ ^-?[0-9]+$ && "$expected" -eq "$actual" ]] ;;
+    float) awk -v actual="$actual" -v expected="$expected" 'BEGIN { exit !((actual + 0) == (expected + 0)) }' ;;
+    string) [[ "$actual" == "$expected" ]] ;;
+    *) return 1 ;;
+  esac
+}
+
+defaults_group_status() {
+  local label="$1"
+  shift
+  local -a mismatches=()
+  local domain key type expected actual
+  while (($#)); do
+    domain="$1"
+    key="$2"
+    type="$3"
+    expected="$4"
+    shift 4
+    actual="$(defaults read "$domain" "$key" 2>/dev/null || true)"
+    if ! defaults_matches "$type" "$expected" "$actual"; then
+      mismatches+=("$key")
+    fi
+  done
+  if ((${#mismatches[@]})); then
+    report wrong "$label: ${mismatches[*]}"
+  else
+    report ok "$label"
+  fi
+}
+
+show_macos_defaults_status() {
+  section "macOS defaults"
+  defaults_group_status keyboard \
+    NSGlobalDomain KeyRepeat int 2 \
+    NSGlobalDomain InitialKeyRepeat int 15 \
+    NSGlobalDomain ApplePressAndHoldEnabled bool false \
+    NSGlobalDomain NSAutomaticSpellingCorrectionEnabled bool false \
+    NSGlobalDomain NSAutomaticCapitalizationEnabled bool false \
+    NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled bool false \
+    NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled bool false \
+    NSGlobalDomain NSAutomaticDashSubstitutionEnabled bool false
+  defaults_group_status Finder \
+    com.apple.finder AppleShowAllFiles bool true \
+    NSGlobalDomain AppleShowAllExtensions bool true \
+    com.apple.finder ShowPathbar bool true \
+    com.apple.finder ShowStatusBar bool true \
+    com.apple.finder FXPreferredViewStyle string Nlsv \
+    com.apple.finder FXDefaultSearchScope string SCcf \
+    com.apple.finder FXEnableExtensionChangeWarning bool false \
+    com.apple.finder DisableAllAnimations bool true \
+    com.apple.finder _FXShowPosixPathInTitle bool false \
+    com.apple.desktopservices DSDontWriteNetworkStores bool true \
+    com.apple.finder ShowExternalHardDrivesOnDesktop bool false \
+    com.apple.finder ShowRemovableMediaOnDesktop bool false \
+    com.apple.finder ShowHardDrivesOnDesktop bool false \
+    com.apple.finder ShowMountedServersOnDesktop bool false
+  defaults_group_status Dock \
+    com.apple.dock tilesize int 64 \
+    com.apple.dock autohide bool true \
+    com.apple.dock autohide-delay float 0 \
+    com.apple.dock autohide-time-modifier float 0 \
+    com.apple.dock show-recents bool false \
+    com.apple.dock mru-spaces bool false \
+    com.apple.dock minimize-to-application bool true \
+    com.apple.dock largesize int 96 \
+    com.apple.dock launchanim bool false \
+    com.apple.dock mineffect string scale \
+    com.apple.dock expose-animation-duration float 0
+  defaults_group_status trackpad \
+    com.apple.AppleMultitouchTrackpad Clicking bool true \
+    com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag bool true \
+    NSGlobalDomain com.apple.scrollwheel.scaling float 0.5
+  defaults_group_status screenshots \
+    com.apple.screencapture location string "$SCREENSHOTS_DIR" \
+    com.apple.screencapture type string png \
+    com.apple.screencapture disable-shadow bool true \
+    com.apple.screencapture show-thumbnail bool false
+  defaults_group_status "menu bar" \
+    com.apple.menuextra.clock ShowDate int 1 \
+    com.apple.menuextra.clock ShowDayOfWeek bool true \
+    com.apple.menuextra.battery ShowPercent string YES
+  defaults_group_status "general UI" \
+    NSGlobalDomain AppleInterfaceStyle string Dark \
+    NSGlobalDomain AppleReduceDesktopTinting bool true \
+    com.apple.Accessibility ReduceMotionEnabled bool true \
+    NSGlobalDomain NSWindowResizeTime float 0.05 \
+    NSGlobalDomain QLPanelAnimationDuration float 0.1 \
+    NSGlobalDomain NSTitlebarToolbarSeparatorStyle string none \
+    NSGlobalDomain NSNavPanelExpandedStateForSaveMode bool true \
+    NSGlobalDomain PMPrintingExpandedStateForPrint bool true \
+    NSGlobalDomain NSDocumentSaveNewDocumentsToCloud bool false
+}
+
 install_macos_defaults() {
   section "macOS defaults"
   apply_keyboard_defaults

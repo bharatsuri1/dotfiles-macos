@@ -7,3 +7,11 @@ install_chrome_defaults() {
   defaults_write com.google.Chrome PasswordManagerEnabled -bool false    # rely on 1Password instead
   log 'Chrome policies written; restart Chrome to apply'
 }
+
+show_chrome_defaults_status() {
+  section Chrome
+  defaults_group_status policies \
+    com.google.Chrome DefaultBrowserSettingEnabled bool false \
+    com.google.Chrome DefaultNotificationsSetting int 2 \
+    com.google.Chrome PasswordManagerEnabled bool false
+}

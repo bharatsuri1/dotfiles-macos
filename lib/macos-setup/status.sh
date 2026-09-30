@@ -17,6 +17,8 @@ show_status() {
     report missing "Homebrew"
   fi
 
+  show_ollama_status
+
   section Mise
   if mise_installed; then
     report ok "$(command -v mise)"
@@ -37,6 +39,10 @@ show_status() {
   show_zed_status
 
   show_yazi_status
+
+  show_macos_defaults_status
+
+  show_chrome_defaults_status
 
   section "Zsh plugins"
   local plugin revision destination
@@ -76,9 +82,6 @@ EOF
     "$HOME/.config/ghostty/config" \
     "$HOME/.config/ghostty/themes/Vesper" \
     "$HOME/.config/fastfetch/config.jsonc" \
-    "$HOME/.config/herdr/config.toml" \
-    "$HOME/.config/nvim" \
-    "$HOME/.config/yazi" \
     "$HOME/.pi/agent/settings.json" \
     "$HOME/.pi/agent/extensions/statusline.ts" \
     "$HOME/.codex/dotfiles.config.toml" \
@@ -86,14 +89,7 @@ EOF
     "$HOME/.config/opencode/tui.jsonc" \
     "$HOME/.config/opencode/herdr-tui-session.js" \
     "$HOME/.local/bin/macos-update" \
-    "$REPO_ROOT/.git/hooks/pre-commit" \
-    "$VSCODE_SETTINGS_TARGET" \
-    "$VSCODE_KEYBINDINGS_TARGET" \
-    "$CURSOR_SETTINGS_TARGET" \
-    "$CURSOR_KEYBINDINGS_TARGET" \
-    "$ZED_SETTINGS_TARGET" \
-    "$ZED_THEME_TARGET" \
-    "$ZED_KEYMAP_TARGET"; do
+    "$REPO_ROOT/.git/hooks/pre-commit"; do
     if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$REPO_ROOT"/* ]]; then
       report linked "$target"
     else
