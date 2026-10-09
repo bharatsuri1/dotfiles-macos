@@ -20,6 +20,7 @@ for module in \
   config \
   mise \
   npm-tools \
+  opencode \
   nvim \
   vscode \
   cursor \
@@ -47,7 +48,8 @@ Commands:
   shell          Link the managed Zsh configuration
   config         Link the shared tool configuration (Starship, bat, tmux, Sesh, Atuin, Ghostty, Fastfetch)
   mise           Install Node.js globally via mise
-  npm-tools      Install global npm CLI tools (pnpm, opencode, codex, pi-coding-agent)
+  npm-tools      Install global npm CLI tools (pnpm, codex, pi-coding-agent)
+  opencode       Install the official OpenCode v2 CLI
   nvim           Link the managed LazyVim Neovim configuration
   vscode         Link managed VS Code settings and install the reviewed extension allowlist
   cursor         Link managed Cursor settings and install the Cursor extension allowlist
@@ -94,6 +96,7 @@ main() {
       install_mise
       install_config
       install_npm_tools
+      install_opencode
       install_nvim
       install_vscode
       install_cursor
@@ -110,6 +113,7 @@ main() {
     config) install_config ;;
     mise) install_mise ;;
     npm-tools) install_npm_tools ;;
+    opencode) install_opencode ;;
     nvim) install_nvim ;;
     vscode) install_vscode ;;
     cursor) install_cursor ;;

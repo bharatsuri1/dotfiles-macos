@@ -1,6 +1,5 @@
 readonly NPM_TOOLS=(
   pnpm
-  opencode-ai
   @openai/codex
   @earendil-works/pi-coding-agent
   @devcontainers/cli
@@ -29,7 +28,7 @@ install_npm_tools() {
     fi
     # Suppress lifecycle scripts only for @earendil-works/pi-coding-agent, whose
     # dependencies include packages with postinstall hooks that fail or are
-    # unnecessary in a global install. Other tools (e.g. opencode-ai) require
+    # unnecessary in a global install. Other tools may require
     # their postinstall to download or wire up a platform binary, so they must
     # install normally. This matches the Fedora policy.
     if [[ "$tool" == @earendil-works/pi-coding-agent ]]; then

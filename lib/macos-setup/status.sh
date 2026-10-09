@@ -28,6 +28,8 @@ show_status() {
 
   show_npm_tools_status
 
+  show_opencode_status
+
   show_herdr_status
 
   show_nvim_status

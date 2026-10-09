@@ -18,7 +18,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-path=("$HOME/.local/bin" $path)
+path=("$HOME/.opencode/bin" "$HOME/.local/bin" $path)
 typeset -U path PATH
 
 [[ -r "$HOME/.zshenv.local" ]] && source "$HOME/.zshenv.local"

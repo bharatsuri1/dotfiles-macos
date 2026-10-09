@@ -103,7 +103,7 @@ as the baseline). No shared symlink or submodule couples them.
 | mise | `brew mise` | `dnf mise` (development phase) |
 | ollama | `brew ollama` (CLI formula; install/uninstall notes in [ollama.md](ollama.md)) | `ollama.sh` (curl installer) |
 | @openai/codex | `npm -g` | `npm -g` (mise node) |
-| OpenCode | `npm -g opencode-ai` (mise node) | Official OpenCode installer |
+| OpenCode | Official OpenCode v2 installer | Official OpenCode installer |
 | @earendil-works/pi-coding-agent | `npm -g --ignore-scripts` | `npm -g --ignore-scripts` (mise node) |
 
 ### macOS-only (in Brewfile, no Fedora equivalent)
@@ -144,7 +144,9 @@ is deferred pending explicit desire to use them on macOS.
 Both platforms explicitly update installed managed npm tools using their latest
 package tags through Mise-managed Node. Pi keeps lifecycle scripts disabled;
 other tools retain required install scripts. The lists remain platform-owned:
-OpenCode is npm-managed on macOS and installed from its official installer on Fedora.
+OpenCode uses the official v2 installer on both platforms, with `--no-modify-path`
+and `~/.opencode/bin` in the managed Zsh PATH. macOS removes the legacy npm
+package after verifying the standalone binary.
 
 Pi settings are merged into a local regular file, with backups before changes.
 Unknown and runtime keys remain local; repeating a compliant deployment does not

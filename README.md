@@ -64,6 +64,7 @@ Each phase can also run independently:
 ./bin/macos-setup config
 ./bin/macos-setup mise
 ./bin/macos-setup npm-tools
+./bin/macos-setup opencode
 ./bin/macos-setup nvim
 ./bin/macos-setup vscode
 ./bin/macos-setup cursor
@@ -111,7 +112,7 @@ Sparkle auto-update off). Tmux copies selections to the macOS
 clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `Prefix Tab` switches to the previous session. The `config` phase also links
 `config/opencode/` (opencode.jsonc and tui.jsonc) into `~/.config/opencode/` so the
-npm-installed `opencode` CLI picks up Vesper-aware settings, permission
+standalone `opencode` CLI picks up Vesper-aware settings, permission
 defaults. Herdr installs and updates its own session-selection plugin; setup
 removes legacy repository links to that plugin. It also merges managed Pi
 preferences into a local settings file and links a Vesper statusline extension
@@ -181,10 +182,22 @@ level (no sudo, applies to the current account only):
 
 Chrome must be restarted for these to take effect.
 
+## OpenCode
+
+The `opencode` phase uses the official v2 installer with `--no-modify-path`.
+The managed `config/zsh/zshenv` adds `~/.opencode/bin` to PATH. Setup checks
+that the standalone binary runs before removing the legacy `opencode-ai`
+package from Mise-managed Node. Repeated setup skips an installed binary.
+OpenCode settings and sessions are preserved. Use `opencode upgrade` for updates.
+
+To recover the legacy installation, run
+`mise exec node@latest -- npm install -g opencode-ai` and move the standalone
+`~/.opencode/bin/opencode` aside so the npm binary is selected.
+
 ## Development runtimes
 
 The `mise` phase installs Node.js globally (`node@latest`). The `npm-tools`
-phase installs the global npm allowlist: `pnpm`, `opencode-ai`,
+phase installs the global npm allowlist: `pnpm`,
 `@openai/codex`, `@earendil-works/pi-coding-agent`, and
 `@devcontainers/cli`. Python tooling comes from `uv` (installed via Homebrew);
 `uv` and `uvx` Zsh completions are sourced from `integrations.zsh`. The `ollama`
