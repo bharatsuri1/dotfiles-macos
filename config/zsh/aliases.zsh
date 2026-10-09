@@ -7,7 +7,7 @@ alias mkdir='mkdir -p'
 alias which='type -a'
 alias path='print -l $path'
 alias reload='exec zsh'
-alias cx='codex --profile dotfiles --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust'
+alias cx='codex --dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust'
 alias sol='cx -c model="gpt-6.1-sol" -c model_reasoning_effort="low"'
 # Compatibility name: the current model family has no Terra model.
 alias terra='cx -c model="gpt-6.1-sol" -c model_reasoning_effort="medium"'

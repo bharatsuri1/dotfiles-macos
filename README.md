@@ -82,9 +82,10 @@ runtime and unknown keys. Existing settings are backed up before changes;
 legacy symlinks are detached so Pi cannot write into the checkout. The statusline
 extension remains linked. Node must be installed before running the config phase.
 
-The `cx` alias selects the managed Codex profile (`gpt-6.1-sol`, low reasoning,
-default service tier, hooks enabled, and remaining-context status).
-`sol` selects the same model; `luna` selects `gpt-6-luna` at xhigh effort.
+The `cx` alias uses the local Codex user configuration. The managed
+`config/codex/dotfiles.config.toml` is a reference for manually updating local
+settings; setup does not merge it into the user configuration.
+`sol` selects `gpt-6.1-sol` at low effort; `luna` selects `gpt-6-luna` at xhigh effort.
 `terra` is retained as a compatibility alias for Sol at medium effort.
 
 ## Shell
@@ -117,10 +118,8 @@ preferences into a local settings file and links a Vesper statusline extension
 into `~/.pi/agent/`; the extension
 shows project, Git, model, thinking, context, token, cost, tool, message, and
 agent-activity state and can be toggled with `/statusline`. It also links a
-Codex `dotfiles` profile into `~/.codex/`, selecting gpt-6.1-sol with low
-reasoning, the default service tier, hooks, and a colored TUI status line
-showing remaining context; invoke it with
-`codex --profile dotfiles`.
+Codex reference config as `~/.codex/dotfiles.config.toml`. Use it to manually
+update `~/.codex/config.toml` when needed; `cx` uses the local user settings.
 
 ## Editors
 

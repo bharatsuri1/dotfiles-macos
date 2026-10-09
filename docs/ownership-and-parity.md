@@ -67,7 +67,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|-------|--------|--------|
 | VS Code `keybindings.json` | `cmd+` keys (navigate, code nav, tasks) | `ctrl+` keys (copy/cut/paste, quickOpen, terminal, sidebar) | macOS reserves `ctrl+` for emacs-style text navigation; `cmd+` is the macOS convention. Fedora uses `ctrl+` as the Linux convention. |
 | VS Code terminal profile | `zsh -l` (native login shell) | `/usr/bin/zsh -l` (native RPM) | Platform-native terminal paths |
-| Zsh `codex` aliases | `cx` selects `dotfiles`; `sol` uses gpt-6.1-sol/low, `luna` uses gpt-6-luna/xhigh, legacy `terra` uses Sol/medium | Same `cx`, `sol`, and `luna`; no legacy `terra` | Both use the existing bypass flags |
+| Zsh `codex` aliases | `cx` uses local user settings; `sol` uses gpt-6.1-sol/low, `luna` uses gpt-6-luna/xhigh, legacy `terra` uses Sol/medium | Same `cx`, `sol`, and `luna`; no legacy `terra` | Both use the existing bypass flags |
 | Neovim lockfile | `config/nvim/lazy-lock.json` is tracked | `config/nvim/lazy-lock.json` (Fedora) | Separate checkouts, so the lockfiles are not reconciled. `config/nvim/lazyvim.json` is gitignored on macOS |
 | `lazyvim.json` | Retained (macOS-only, gitignored) | Not present | macOS-specific snapshot; gitignored by design |
 
@@ -149,5 +149,5 @@ OpenCode is npm-managed on macOS and installed from its official installer on Fe
 Pi settings are merged into a local regular file, with backups before changes.
 Unknown and runtime keys remain local; repeating a compliant deployment does not
 rewrite the file. The statusline extension remains repository-linked. Codex’s
-portable profile is selected by `cx`; project trust and hook trust state stay in
-the local base configuration.
+portable config is a reference for manual updates to the local user configuration.
+`cx` uses that local configuration, including project trust and hook trust state.
