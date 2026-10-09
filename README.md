@@ -76,6 +76,17 @@ Configuration deployment uses symlinks back into this checkout. An existing
 target is moved first to a timestamped directory under
 `~/.local/state/dotfiles-macos/backups/`; it is never silently overwritten.
 
+Pi preferences are an exception to symlink deployment: setup merges
+`config/pi/settings.json` into the local `~/.pi/agent/settings.json`, preserving
+runtime and unknown keys. Existing settings are backed up before changes;
+legacy symlinks are detached so Pi cannot write into the checkout. The statusline
+extension remains linked. Node must be installed before running the config phase.
+
+The `cx` alias selects the managed Codex profile (`gpt-6.1-sol`, low reasoning,
+default service tier, hooks enabled, and remaining-context status).
+`sol` selects the same model; `luna` selects `gpt-6-luna` at xhigh effort.
+`terra` is retained as a compatibility alias for Sol at medium effort.
+
 ## Shell
 
 The managed Zsh setup keeps durable configuration under `config/zsh/` with
@@ -101,8 +112,9 @@ clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `config/opencode/` (opencode.jsonc and tui.jsonc) into `~/.config/opencode/` so the
 npm-installed `opencode` CLI picks up Vesper-aware settings, permission
 defaults. Herdr installs and updates its own session-selection plugin; setup
-removes legacy repository links to that plugin. It also links managed Pi
-settings and a Vesper statusline extension into `~/.pi/agent/`; the extension
+removes legacy repository links to that plugin. It also merges managed Pi
+preferences into a local settings file and links a Vesper statusline extension
+into `~/.pi/agent/`; the extension
 shows project, Git, model, thinking, context, token, cost, tool, message, and
 agent-activity state and can be toggled with `/statusline`. It also links a
 Codex `dotfiles` profile into `~/.codex/`, selecting gpt-6.1-sol with low
@@ -184,6 +196,11 @@ curl-bash), and links the managed herdr config with the Vesper theme,
 `prefix+shift+o`/`prefix+shift+u` worktree bindings, "spaces" agent panel,
 dot status indicators, no sound, and `onboarding=false`. `macos-update` sets
 `DOTFILES_MACOS_ASSUME_YES=1`, which skips that confirmation.
+
+`macos-update` upgrades all installed Homebrew packages and explicitly installs
+the latest versions of installed managed npm tools through Mise-managed Node.
+Pi retains `--ignore-scripts`; other npm tools keep their required install scripts.
+Unmanaged npm packages are untouched.
 
 ## Yazi
 

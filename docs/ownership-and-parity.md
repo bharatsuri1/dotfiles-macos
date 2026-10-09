@@ -25,12 +25,12 @@ as the baseline). No shared symlink or submodule couples them.
 | mise | `config/mise/config.toml` | Both set `[tools] node = "latest"` |
 | Tmux | `config/tmux/tmux.conf` | Identical except macOS uses `pbcopy`, Fedora uses `wl-copy` |
 | Tmux status | `config/tmux/status.conf` | Identical (Vesper powerline pills) |
-| Sesh | `config/sesh/sesh.toml` | Identical |
+| Sesh | `config/sesh/sesh.toml` | Shared behavior; checkout session paths are platform-specific |
 | Neovim (LazyVim) | `config/nvim/` | Separate lockfiles by design (see below) |
 | VS Code settings | `config/vscode/settings.json` | Vim keybindings identical; terminal profiles and external-terminal settings are platform-specific |
 | Zed | `config/zed/` | Shared editor settings and Vesper theme; keymaps are platform-specific and AI/provider settings stay local |
 | Codex profile | `config/codex/dotfiles.config.toml` | Identical |
-| Pi settings | `config/pi/settings.json` | May drift independently (runtime model/provider switches) |
+| Pi settings | `config/pi/settings.json` | Portable preferences may differ; merged into local settings files that preserve runtime keys |
 | Pi statusline | `config/pi/extensions/statusline.ts` | Identical |
 | Fastfetch | `config/fastfetch/config.jsonc` | Identical (fastfetch does OS detection internally) |
 
@@ -42,7 +42,7 @@ as the baseline). No shared symlink or submodule couples them.
 |------|---------------------|
 | Ghostty | macOS cask; Fedora uses Alacritty (dnf) |
 | Yazi | macOS-only file manager for now (managed `config/yazi/` with the Vesper flavor and the `y` cwd-aware shell wrapper); no Fedora equivalent yet |
-| 1Password, Google Chrome, Raycast, Cleanshot, Homerow, Little Snitch, Logi Options+, Bazecor, Alcove, Antinote, Handy, Copilot Money, Proton VPN, Discord, ChatGPT, OrbStack, LocalSend, Signal, Pearcleaner | macOS-only GUI applications |
+| 1Password, Google Chrome, Raycast, Cleanshot, Homerow, Little Snitch, Logi Options+, Bazecor, Alcove, Antinote, Handy, Copilot Money, Proton VPN, Discord, ChatGPT, OrbStack, LocalSend, Signal, Pearcleaner | GUI applications managed through macOS casks; several also have Fedora-native or Flatpak delivery |
 | `pmset` alias (`afk`) | macOS power management |
 | `defaults write` aliases (`showfiles`/`hidefiles`) | macOS Finder |
 | `caffeinate` wrapper | macOS has a native `caffeinate`; Fedora uses `systemd-inhibit` |
@@ -66,8 +66,8 @@ as the baseline). No shared symlink or submodule couples them.
 | Area | macOS | Fedora | Reason |
 |------|-------|--------|--------|
 | VS Code `keybindings.json` | `cmd+` keys (navigate, code nav, tasks) | `ctrl+` keys (copy/cut/paste, quickOpen, terminal, sidebar) | macOS reserves `ctrl+` for emacs-style text navigation; `cmd+` is the macOS convention. Fedora uses `ctrl+` as the Linux convention. |
-| VS Code terminal profile | `zsh -l` (native login shell) | `flatpak-spawn --host zsh` (VS Code runs as a Flatpak) | Fedora VS Code is sandboxed; needs host spawn |
-| Zsh `codex` aliases | `cx` passes `--dangerously-bypass-approvals-and-sandbox` and `--dangerously-bypass-hook-trust`; `sol`, `terra`, and `luna` call `cx` | `cx`/`sol`/`terra` with `--dangerously-bypass-approvals-and-sandbox --dangerously-bypass-hook-trust` | The macOS aliases currently pass the bypass flags too |
+| VS Code terminal profile | `zsh -l` (native login shell) | `/usr/bin/zsh -l` (native RPM) | Platform-native terminal paths |
+| Zsh `codex` aliases | `cx` selects `dotfiles`; `sol` uses gpt-6.1-sol/low, `luna` uses gpt-6-luna/xhigh, legacy `terra` uses Sol/medium | Same `cx`, `sol`, and `luna`; no legacy `terra` | Both use the existing bypass flags |
 | Neovim lockfile | `config/nvim/lazy-lock.json` is tracked | `config/nvim/lazy-lock.json` (Fedora) | Separate checkouts, so the lockfiles are not reconciled. `config/nvim/lazyvim.json` is gitignored on macOS |
 | `lazyvim.json` | Retained (macOS-only, gitignored) | Not present | macOS-specific snapshot; gitignored by design |
 
@@ -96,11 +96,14 @@ as the baseline). No shared symlink or submodule couples them.
 | jless | `brew jless` | `linuxbrew jless` |
 | xh | `brew xh` | `linuxbrew xh` |
 | neovim | `brew neovim` | `dnf neovim` |
+| dust | `brew dust` | `dnf du-dust` |
+| ShellCheck | `brew shellcheck` | `dnf shellcheck` (development phase) |
+| @devcontainers/cli | `npm -g` (mise node) | `npm -g` (mise node) |
 | uv | `brew uv` | `dnf uv` (development phase) |
 | mise | `brew mise` | `dnf mise` (development phase) |
 | ollama | `brew ollama` (CLI formula; install/uninstall notes in [ollama.md](ollama.md)) | `ollama.sh` (curl installer) |
 | @openai/codex | `npm -g` | `npm -g` (mise node) |
-| opencode-ai | `npm -g` | `npm -g` (mise node) |
+| OpenCode | `npm -g opencode-ai` (mise node) | Official OpenCode installer |
 | @earendil-works/pi-coding-agent | `npm -g --ignore-scripts` | `npm -g --ignore-scripts` (mise node) |
 
 ### macOS-only (in Brewfile, no Fedora equivalent)
@@ -110,8 +113,7 @@ that could also be useful on Fedora but are not yet in the Fedora repo. They
 are not regressions; adding them to Fedora is a future decision, not a parity
 gap that blocks macOS.
 
-`jq`, `direnv`, `wget`, `hyperfine`, `glow`, `dust`, `shellcheck`, `pnpm` (npm),
-`@devcontainers/cli` (npm),
+`jq`, `direnv`, `wget`, `hyperfine`, `glow`, `pnpm` (npm),
 `k9s`, `lnav`, `logdy`, `lazysql`, `yazi`, `sevenzip`,
 `vivid`, `allure`, `ffmpeg-full`, `imagemagick-full`,
 `poppler`, `resvg`
@@ -136,3 +138,16 @@ time. Fedora's Linux-specific system tools (powertop, systemctl-tui, batctl)
 have no macOS equivalent and never will. The remaining Fedora developer CLIs
 that could reasonably be added to macOS are `diskonaut` and `bandwhich`; this
 is deferred pending explicit desire to use them on macOS.
+
+## Updates and mutable settings
+
+Both platforms explicitly update installed managed npm tools using their latest
+package tags through Mise-managed Node. Pi keeps lifecycle scripts disabled;
+other tools retain required install scripts. The lists remain platform-owned:
+OpenCode is npm-managed on macOS and installed from its official installer on Fedora.
+
+Pi settings are merged into a local regular file, with backups before changes.
+Unknown and runtime keys remain local; repeating a compliant deployment does not
+rewrite the file. The statusline extension remains repository-linked. Codex’s
+portable profile is selected by `cx`; project trust and hook trust state stay in
+the local base configuration.
