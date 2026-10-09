@@ -39,4 +39,8 @@ log 'updating Homebrew packages'
 brew update
 brew upgrade -y
 
+# shellcheck source=/dev/null
+source "$INSTALL_ROOT/lib/macos-setup/npm-tools.sh"
+update_npm_tools
+
 output_summary
