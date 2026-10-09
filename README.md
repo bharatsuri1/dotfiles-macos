@@ -99,14 +99,16 @@ Sparkle auto-update off). Tmux copies selections to the macOS
 clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `Prefix Tab` switches to the previous session. The `config` phase also links
 `config/opencode/` (opencode.jsonc, tui.jsonc with the herdr-tui-session
-plugin, and the plugin file itself) into `~/.config/opencode/` so the
+plugin reference) into `~/.config/opencode/` so the
 npm-installed `opencode` CLI picks up Vesper-aware settings, permission
-defaults, and the herdr session-selection integration. It also links managed Pi
+defaults. Herdr installs and updates its own session-selection plugin; setup
+removes legacy repository links to that plugin. It also links managed Pi
 settings and a Vesper statusline extension into `~/.pi/agent/`; the extension
 shows project, Git, model, thinking, context, token, cost, tool, message, and
 agent-activity state and can be toggled with `/statusline`. It also links a
-Codex `dotfiles` profile into `~/.codex/`, selecting gpt-5.6-sol with low
-reasoning, hooks, and a colored TUI status line; invoke it with
+Codex `dotfiles` profile into `~/.codex/`, selecting gpt-6.1-sol with low
+reasoning, the default service tier, hooks, and a colored TUI status line
+showing remaining context; invoke it with
 `codex --profile dotfiles`.
 
 ## Editors
