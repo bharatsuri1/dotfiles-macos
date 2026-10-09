@@ -37,6 +37,10 @@ install_homebrew() {
       /bin/bash -c "$(curl -fsSL "$HOMEBREW_INSTALLER_URL")"
     fi
     ensure_brew_on_path
+    if $DRY_RUN; then
+      run brew bundle install --verbose --file "$REPO_ROOT/Brewfile"
+      return
+    fi
     command -v brew >/dev/null 2>&1 || die 'Homebrew installation did not provide brew on PATH'
   fi
 

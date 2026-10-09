@@ -34,10 +34,21 @@ remove_managed_herdr_plugin_link() {
   fi
 }
 
+repo_hook_path() {
+  [[ -e "$REPO_ROOT/.git" ]] || return 1
+  local hook_path
+  hook_path="$(git -C "$REPO_ROOT" rev-parse --git-path hooks/pre-commit)" || return 1
+  if [[ "$hook_path" != /* ]]; then
+    hook_path="$REPO_ROOT/$hook_path"
+  fi
+  printf '%s\n' "$hook_path"
+}
+
 install_repo_hook() {
-  if [[ ! -d "$REPO_ROOT/.git" ]]; then
-    log 'skipping pre-commit hook; this checkout has no .git directory'
+  local hook_path
+  if ! hook_path="$(repo_hook_path)"; then
+    report local 'skipping pre-commit hook; this checkout has no Git metadata'
     return
   fi
-  link_config "$REPO_ROOT/hooks/pre-commit" "$REPO_ROOT/.git/hooks/pre-commit"
+  link_config "$REPO_ROOT/hooks/pre-commit" "$hook_path"
 }

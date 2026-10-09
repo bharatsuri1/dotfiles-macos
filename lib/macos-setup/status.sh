@@ -62,37 +62,38 @@ zsh-history-substring-search $HISTORY_SUBSTRING_SEARCH_REVISION
 EOF
 
   section Configuration
-  local target
-  for target in \
-    "$HOME/.zshenv" \
-    "$HOME/.config/zsh/.zshrc" \
-    "$HOME/.config/zsh/aliases.zsh" \
-    "$HOME/.config/zsh/completion.zsh" \
-    "$HOME/.config/zsh/integrations.zsh" \
-    "$HOME/.config/zsh/options.zsh" \
-    "$HOME/.config/zsh/plugins.zsh" \
-    "$HOME/.config/zsh/keys.zsh" \
-    "$HOME/.config/starship.toml" \
-    "$HOME/.config/bat/config" \
-    "$HOME/.config/tmux/tmux.conf" \
-    "$HOME/.config/tmux/status.conf" \
-    "$HOME/.config/sesh/sesh.toml" \
-    "$HOME/.config/atuin/config.toml" \
-    "$HOME/.config/mise/config.toml" \
-    "$HOME/.config/ghostty/config" \
-    "$HOME/.config/ghostty/themes/Vesper" \
-    "$HOME/.config/fastfetch/config.jsonc" \
-    "$HOME/.pi/agent/settings.json" \
-    "$HOME/.pi/agent/extensions/statusline.ts" \
-    "$HOME/.codex/dotfiles.config.toml" \
-    "$HOME/.config/opencode/opencode.jsonc" \
-    "$HOME/.config/opencode/tui.jsonc" \
-    "$HOME/.local/bin/macos-update" \
-    "$REPO_ROOT/.git/hooks/pre-commit"; do
-    if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$REPO_ROOT"/* ]]; then
-      report linked "$target"
-    else
-      report local "$target"
-    fi
+  local hook_path
+  if hook_path="$(repo_hook_path)"; then
+    show_config_link_status "$REPO_ROOT/hooks/pre-commit" "$hook_path"
+  fi
+  local -a config_links=(
+    "$REPO_ROOT/config/zsh/zshenv" "$HOME/.zshenv"
+    "$REPO_ROOT/config/zsh/zshrc" "$HOME/.config/zsh/.zshrc"
+    "$REPO_ROOT/config/zsh/aliases.zsh" "$HOME/.config/zsh/aliases.zsh"
+    "$REPO_ROOT/config/zsh/completion.zsh" "$HOME/.config/zsh/completion.zsh"
+    "$REPO_ROOT/config/zsh/integrations.zsh" "$HOME/.config/zsh/integrations.zsh"
+    "$REPO_ROOT/config/zsh/options.zsh" "$HOME/.config/zsh/options.zsh"
+    "$REPO_ROOT/config/zsh/plugins.zsh" "$HOME/.config/zsh/plugins.zsh"
+    "$REPO_ROOT/config/zsh/keys.zsh" "$HOME/.config/zsh/keys.zsh"
+    "$REPO_ROOT/config/starship.toml" "$HOME/.config/starship.toml"
+    "$REPO_ROOT/config/bat/config" "$HOME/.config/bat/config"
+    "$REPO_ROOT/config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+    "$REPO_ROOT/config/tmux/status.conf" "$HOME/.config/tmux/status.conf"
+    "$REPO_ROOT/config/sesh/sesh.toml" "$HOME/.config/sesh/sesh.toml"
+    "$REPO_ROOT/config/atuin/config.toml" "$HOME/.config/atuin/config.toml"
+    "$REPO_ROOT/config/mise/config.toml" "$HOME/.config/mise/config.toml"
+    "$REPO_ROOT/config/ghostty/config" "$HOME/.config/ghostty/config"
+    "$REPO_ROOT/config/ghostty/themes/Vesper" "$HOME/.config/ghostty/themes/Vesper"
+    "$REPO_ROOT/config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+    "$REPO_ROOT/config/pi/settings.json" "$HOME/.pi/agent/settings.json"
+    "$REPO_ROOT/config/pi/extensions/statusline.ts" "$HOME/.pi/agent/extensions/statusline.ts"
+    "$REPO_ROOT/config/codex/dotfiles.config.toml" "$HOME/.codex/dotfiles.config.toml"
+    "$REPO_ROOT/config/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+    "$REPO_ROOT/config/opencode/tui.jsonc" "$HOME/.config/opencode/tui.jsonc"
+    "$REPO_ROOT/bin/macos-update" "$HOME/.local/bin/macos-update"
+  )
+  local index
+  for ((index = 0; index < ${#config_links[@]}; index += 2)); do
+    show_config_link_status "${config_links[index]}" "${config_links[index + 1]}"
   done
 }

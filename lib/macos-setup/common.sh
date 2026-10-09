@@ -33,3 +33,23 @@ confirm() {
 require_macos() {
   [[ "$(uname -s)" == Darwin ]] || die 'this CLI currently supports macOS only'
 }
+
+show_config_link_status() {
+  local source="$1"
+  local target="$2"
+  local resolved=''
+  if [[ -L "$target" ]]; then
+    resolved="$(readlink -f -- "$target" 2>/dev/null || true)"
+    if [[ ! -e "$target" ]]; then
+      report broken "$target"
+    elif [[ "$resolved" == "$(readlink -f -- "$source" 2>/dev/null || true)" ]]; then
+      report linked "$target"
+    else
+      report wrong "$target -> $resolved"
+    fi
+  elif [[ -e "$target" ]]; then
+    report local "$target"
+  else
+    report missing "$target"
+  fi
+}

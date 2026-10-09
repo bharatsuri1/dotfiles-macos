@@ -33,10 +33,13 @@ shell_files=(
   bootstrap.sh
   bin/macos-setup
   bin/macos-update
+  hooks/pre-commit
 )
 for shell_file in lib/macos-setup/*.sh; do
   shell_files+=("$shell_file")
 done
 
-bash -n "${shell_files[@]}"
+for shell_file in "${shell_files[@]}"; do
+  bash -n "$shell_file"
+done
 "$checker" --shell=bash "${shell_files[@]}"
