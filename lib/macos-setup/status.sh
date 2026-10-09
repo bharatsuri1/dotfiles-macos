@@ -87,7 +87,6 @@ EOF
     "$HOME/.codex/dotfiles.config.toml" \
     "$HOME/.config/opencode/opencode.jsonc" \
     "$HOME/.config/opencode/tui.jsonc" \
-    "$HOME/.config/opencode/herdr-tui-session.js" \
     "$HOME/.local/bin/macos-update" \
     "$REPO_ROOT/.git/hooks/pre-commit"; do
     if [[ -L "$target" && "$(readlink -f -- "$target" 2>/dev/null || true)" == "$REPO_ROOT"/* ]]; then

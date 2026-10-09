@@ -98,8 +98,7 @@ JetBrainsMono Nerd Font 14, macOS-native window chrome with `Opt` as `Alt`,
 Sparkle auto-update off). Tmux copies selections to the macOS
 clipboard with `pbcopy`, and `Prefix b` opens the Sesh session picker while
 `Prefix Tab` switches to the previous session. The `config` phase also links
-`config/opencode/` (opencode.jsonc, tui.jsonc with the herdr-tui-session
-plugin reference) into `~/.config/opencode/` so the
+`config/opencode/` (opencode.jsonc and tui.jsonc) into `~/.config/opencode/` so the
 npm-installed `opencode` CLI picks up Vesper-aware settings, permission
 defaults. Herdr installs and updates its own session-selection plugin; setup
 removes legacy repository links to that plugin. It also links managed Pi
