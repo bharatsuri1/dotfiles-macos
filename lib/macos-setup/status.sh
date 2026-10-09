@@ -62,6 +62,7 @@ zsh-history-substring-search $HISTORY_SUBSTRING_SEARCH_REVISION
 EOF
 
   section Configuration
+  show_pi_settings_status
   local hook_path
   if hook_path="$(repo_hook_path)"; then
     show_config_link_status "$REPO_ROOT/hooks/pre-commit" "$hook_path"
@@ -85,7 +86,6 @@ EOF
     "$REPO_ROOT/config/ghostty/config" "$HOME/.config/ghostty/config"
     "$REPO_ROOT/config/ghostty/themes/Vesper" "$HOME/.config/ghostty/themes/Vesper"
     "$REPO_ROOT/config/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
-    "$REPO_ROOT/config/pi/settings.json" "$HOME/.pi/agent/settings.json"
     "$REPO_ROOT/config/pi/extensions/statusline.ts" "$HOME/.pi/agent/extensions/statusline.ts"
     "$REPO_ROOT/config/codex/dotfiles.config.toml" "$HOME/.codex/dotfiles.config.toml"
     "$REPO_ROOT/config/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"

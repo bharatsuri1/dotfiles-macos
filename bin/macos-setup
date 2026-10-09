@@ -91,8 +91,8 @@ main() {
       install_chrome_defaults
       install_shell_tools
       install_shell
-      install_config
       install_mise
+      install_config
       install_npm_tools
       install_nvim
       install_vscode
